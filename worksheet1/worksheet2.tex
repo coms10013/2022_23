@@ -1,0 +1,132 @@
+%ps1.tex
+%notes for the course Probability and Statistics COMS10011 
+%taught at the University of Bristol
+%2019_20 Conor Houghton conor.houghton@bristol.ac.uk
+
+%To the extent possible under law, the author has dedicated all copyright 
+%and related and neighboring rights to these notes to the public domain 
+%worldwide. These notes are distributed without any warranty. 
+
+\documentclass[11pt,a4paper]{scrartcl}
+\typearea{12}
+\usepackage{graphicx}
+%\usepackage{pstricks}
+\usepackage{listings}
+\usepackage{color}
+\lstset{language=C}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\lhead{\texttt{github.com/coms10013/2022\_23} and  \texttt{coms10013.github.io}}
+\lfoot{COMS10013 - ws2 - Conor}
+\begin{document}
+
+\section*{COMS10013 - Analysis - WS2}
+
+\subsection*{Useful facts}
+
+\begin{itemize}
+\item gradients for $f(x,y)$; $\nabla{f}=(f_x,f_y)$ where $f_x=\partial f/\partial x$.
+\item gradients for $f(x,y)$; $\nabla_{\mathbf{w}}{f}=\mathbf{w}\cdot\nabla{f}$
+\item the Hessian
+$$H(f)=\left(\begin{array}{cc}f_{xx}&f_{xy}\\f_{yx}&f_{yy}\end{array}\right)$$
+\item the determinant of a matrix is equal the multiple of its eigenvalues, the trace is the sum.
+\item the Taylor series is
+  $$f(a+x)=f(a)+f'(a)x+\frac{1}{2}f''(a)x^2+\frac{1}{6}f'''(a)x^3+\ldots$$
+  or
+  $$f(a+x)=f(a)+\sum_{n=1}^\infty \frac{1}{n!}x^n\left.\frac{d^nf}{dx^n}\right|_{x=a}$$
+\item reminder that the original `Leibniz' approach is to expand $f(x+dx)$ and then at the end set any $dx$s to zero.
+\item $$\sin(a) - \sin(b) = 2\sin((a-b)/2)\cos((a+b)/2).$$
+\end{itemize}
+
+\subsection*{Questions}
+
+These are the questions you should make sure you work on in the workshop.
+
+\begin{enumerate}
+
+\item \textbf{Gradients and Hessians} Let $z(x,y) = x^2y + 3xy^2 + xy$.
+	\begin{itemize}
+		\item[(a)] Find the gradient of $z(x,y)$.
+		\item[(b)] Find the derivative of $z(x,y)$ along the vector $\left(\begin{array}{c} 3 \\ 1 \end{array}\right).$
+		\item[(c)] Compute $\nabla_{\tiny\left(\begin{array}{c} 3 \\ 1 \end{array}\right)} z \left(\left(\begin{array}{c} 2 \\ 0 \end{array}\right)\right)$.
+                  \item[(d)] What is the Hessian of $z(x,y)$?
+\end{itemize}
+
+	
+	\item \textbf{Extremal points in two dimensions}; this question is pretty hard!
+	\begin{itemize}
+		\item[(a)] Find the local extrema, and determine their types, for
+		\[z(x,y) = x^3 + y^3 - \frac{1}{2}(15x^2 + 9y^2) + 18x + 6y + 1.\]
+		\item[(b)] Find the local extrema, and determine their types, for
+		\[z(x,y) = 3xy^2 - 30y^2 + 30xy - 300y + 2x^3 - 15x^2 + 111x + 7.\]
+	\end{itemize}
+	
+	\item \textbf{Taylor series}
+	\begin{itemize}
+		\item[(a)] Compute the Taylor series of $e^x$ at $x=2$.
+		\item[(b)] Compute the Taylor series of $1/(1-x)^2$ at $x=0$.
+		\item[(c)] Compute the Taylor series of $1/x$ at $x=2$. 
+	\end{itemize}
+	
+        
+\end{enumerate}
+
+\subsection*{Extra questions}
+
+These are extra questions you might attempt in the workshop or at a
+later time; in fact these questions are tricky so you might want to
+come back to them later when you've had some more lectures.
+
+\begin{enumerate}
+
+
+	\item \textbf{Trigonometric functions}
+	\begin{itemize}
+		\item[(a)] Compute the derivative of the sine function the 
+			old-fashioned Newton-Leibniz way.
+			You should get that if $y = \sin (x)$ then $\frac{dy}{dx} = \cos (x)$.
+			The method is as follows:
+			\begin{itemize}
+				\item Write out the equation for $dy$.
+				\item Use the formula
+				$$\sin(a) - \sin(b) = 2\sin((a-b)/2)\cos((a+b)/2).$$
+				\item Use the following approximations: near 0, 
+					the sine function is roughly a straight line with slope 1
+					so $\sin(a) \approx a$ when $a$ is small, and
+					$\cos(x+a) \approx \cos x$ 
+					when $a$ is small compared to $x$ (for example if $a = dx$).
+			\end{itemize}
+		\item[(b)] Now, \emph{define} 
+			\[\sin(x) := \sum_{n = 0}^{\infty} \frac{(-1)^n}{(2n+1)!}x^{2n+1} \]
+			and
+			\[\cos(x) := \sum_{n = 0}^{\infty} \frac{(-1)^n}{2n !} x^{2n}.\]
+			(Recall that $0! = 1$).
+			\begin{itemize}
+				\item[(i)] Assuming that you can swap the order of 
+				$\frac{d}{dx}$ and $\sum_{n=0}^\infty$, 
+				prove that $\frac{d}{dx} \sin(x) = \cos (x)$ 
+				and $\frac{d}{dx} \cos(x) = -\sin(x)$.
+				\item[(ii)] Define $i$ to be a number such that $i^2 = -1$, 
+				and for any integer $n$, that $i^{2n} = (-1)^n$ and $i^{2n+1} = (-1)^n i$.
+				Prove that 
+				\[e^{ix} = \cos (x) + i \sin(x).\]
+				(If you like, deduce that $e^{i\pi} = -1$).
+			\end{itemize}
+	\end{itemize}
+	
+	\item \textbf{Computing with Taylor series}.\\
+	This exercise is to approximate $\sin(\pi/4)$ without 
+	using any trigonometric functions on your calculator.
+ 	Either recall from the question 1(b) or recompute, without a calculator, 
+ 	the Taylor series of
+		$\sin (x)$ at $x=0$.
+		Compute the approximations $T_1(x)$, $T_3(x)$, $T_5(x)$, $T_7(x)$ from your
+		series at $x = \pi/4$ to eight decimal places (you can use a calculator).
+		(You can check how accurate your approximations are by plugging in 
+		$\sin(\pi/4)$ to your calculator and comparing your answer.)
+	
+
+  
+\end{enumerate}
+
+\end{document}
