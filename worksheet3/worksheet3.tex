@@ -1,0 +1,158 @@
+%ps1.tex
+%notes for the course Probability and Statistics COMS10011 
+%taught at the University of Bristol
+%2019_20 Conor Houghton conor.houghton@bristol.ac.uk
+
+%To the extent possible under law, the author has dedicated all copyright 
+%and related and neighboring rights to these notes to the public domain 
+%worldwide. These notes are distributed without any warranty. 
+
+\documentclass[11pt,a4paper]{scrartcl}
+\typearea{12}
+\usepackage{graphicx}
+%\usepackage{pstricks}
+\usepackage{listings}
+\usepackage{color}
+\lstset{language=C}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\lhead{\texttt{github.com/coms10013/2022\_23} and  \texttt{coms10013.github.io}}
+\lfoot{COMS10013 - ws3 - Conor}
+\begin{document}
+
+\section*{COMS10013 - Analysis - WS3}
+
+These worksheets are partly, well mostly, taken from worksheets prepared by Chloe Martindale.
+
+\subsection*{Useful facts}
+
+\begin{itemize}
+\item the \textbf{Taylor series} is
+  $$f(a+x)=f(a)+f'(a)x+\frac{1}{2}f''(a)x^2+\frac{1}{6}f'''(a)x^3+\ldots$$
+  or
+  $$f(a+x)=f(a)+\sum_{n=1}^\infty \frac{1}{n!}x^n\left.\frac{d^nf}{dx^n}\right|_{x=a}$$
+\item if $z=x+iy$ the conjugate $z^*=x-iy$ and the absolute value is $|z|^2=zz^*=x^2+y^2$.
+\item to work out $w/z$ where $w$ and $z$ are complex, multiply above and below by $z^*$.
+\item in polar form we write
+  \begin{equation}
+    x+iy=re^{i\theta}
+  \end{equation}
+  To convert from polar form to Cartesian form we use
+  \begin{equation}
+    e^{i\theta}=\cos{\theta}+i\sin{\theta}
+  \end{equation}
+  To convert the other way $r=|z|$ and $\theta=\tan^{-1}y/x$.
+
+  
+
+
+\end{itemize}
+
+
+\subsection*{Questions}
+
+These are the questions you should make sure you work on in the workshop.
+
+\begin{enumerate}
+
+\item \textbf{Taylor series} Calculate the Taylor expansion, three or four terms, at $x=0$ for
+	\begin{itemize}
+		\item[(a)] $f(x)=1/(1+x)$
+		\item[(b)] $f(x)=\log{(1+x)}$
+		\item[(c)] $f(x)=\exp{(x)}$
+
+\end{itemize}
+
+\item \textbf{Complex numbers}: calculate the following complex numbers in the form $(a+bi)$: 
+	\begin{itemize}
+		\item[(a)] $(2+3i) + (5-2i)$
+		\item[(b)] $(-1+i)(-1-i)$
+		\item[(c)] $(1-i)^3$
+		\item[(d)] $(1+i)/(1-i)$
+	\end{itemize}
+
+	\item \textbf{More complex numbers}: Compute the real part, imaginary part, norm, and conjugate of the following numbers:
+	\begin{itemize}
+		\item[(a)] $i$
+		\item[(b)] $3-2i$
+	\end{itemize}
+	
+	
+	\item  \textbf{Polar form}. Convert between rectangular $(a+ib)$ and polar $re^{i\theta}$ form:
+	\begin{itemize}
+		\item[(a)] $i$
+		\item[(b)] $2-i$
+		\item[(c)] $3e^{i\pi/2}$
+		\item[(d)] $e^{1+2i}$
+	\end{itemize}
+
+        
+	
+        
+\end{enumerate}
+
+\subsection*{Discussion questions}
+
+These are questions you could discuss with your group:
+
+	\begin{enumerate}
+		\item What does conjugating a complex number mean as a geometric operation on a point in the complex plane?
+		\item What is the formula for conjugating a complex number given in polar form?
+		\item What is the formula for the norm of a complex number given in polar form?
+		\item What is the formula for the inverse of a complex number in polar form (e.g. $1/re^{i\theta}$, give the
+		solution in polar form again) and what does this mean geometrically?
+	      \item If you write a complex number $(a+bi)$ as a vector $(a,b)$, how would you express the function which rotates the number around the origin by an angle $\theta$? (Hint: think about matrices).
+              \item How are complex numbers different from two-dimensional vectors? (Hint: think about division)
+              \item What about other dimensions? Can they be thought of as being like complex numbers? This is a very difficult problem!
+	\end{enumerate}
+
+
+\subsection*{Extra questions}
+
+These are extra questions you might attempt in the workshop or at a
+later time; in fact these questions are tricky so you might want to
+come back to them later when you've had some more lectures.
+
+\begin{enumerate}
+
+ \item \textbf{L'H\^{o}pital's rule}: this says that if you interested in the limit of a function
+  \begin{equation}
+    \lim_{x\rightarrow a}\frac{f(x)}{g(x)}
+  \end{equation}
+  and $f(a)=g(a)=0$ then
+\begin{equation}
+    \lim_{x\rightarrow a}\frac{f(x)}{g(x)}=\lim_{x\rightarrow a}\frac{f'(x)}{g'(x)}
+  \end{equation}
+where I am using $f'(x)=df/dx$. Use this to work out
+\begin{equation}
+  \lim_{x\rightarrow 0}\frac{\sin(x)}{x}
+\end{equation}
+  
+\item \textbf{Taylor series}: calculate the Taylor series for
+\begin{equation}
+  f(x)=\left\{\begin{array}{ll}\exp{(-1/x)}&x>0\\0&x\le 0\end{array}\right.
+\end{equation}
+at $x=0$. This is a bit of a joke, so don't spend too much time on it; weird though, isn't it!
+
+
+\item \textbf{Equations with complex solutions}. Solve the following equations over the complex numbers
+  \begin{itemize}
+  \item[(a)] $x^2 - 2x + 5 = 0$
+  \item[(b)] $x^2-2x + 8 = 0$
+  \item[(c)] $x^2 - ix - 1 = 0$
+  \item[(d)] $x^5 - 1 = 0$. How many solutions do you expect?
+  \end{itemize}
+
+  \item \textbf{Some hard complex number questions}.
+	\begin{itemize}
+		\item[(a)] Over the complex numbers, what are the eigenvalues and eigenvectors of the matrix
+		\[\left(\begin{array}{cc} 2&1 \\ -1&2 \end{array}\right)?\]
+		\item[(b)] The square roots of a number $x$ are all numbers $y$ with $y^2 = x$. How would you find the square root of any given complex number?
+		\item[(c)] Compute $(1+i)^{1-i}$, either as an exact/symbolic result or to 3 decimal places.
+	\end{itemize}
+
+\end{enumerate}
+
+
+
+\end{document}
