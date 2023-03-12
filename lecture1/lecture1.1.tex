@@ -1,0 +1,342 @@
+\documentclass[12pt]{article}
+\usepackage{amsfonts, epsfig}
+\usepackage[authoryear]{natbib}
+\usepackage{graphicx}
+\usepackage{fancyhdr}
+\usepackage{amsmath}
+\pagestyle{fancy}
+\lfoot{\texttt{coms10013.github.io}}
+\lhead{Analysis - 1.1 Introduction to differentiation - Conor}
+\rhead{\thepage}
+\cfoot{}
+\begin{document}
+
+\section*{Mathematics as whole is composed of three parts}
+
+We tend to split mathematics into three parts, algebra, analysis and
+the other stuff. To my mind algebra is the stuff we make up, we define
+some rules, like a \textsl{group} is a set with a map satisfying such
+and such a list of properties and then we consider the consequences of
+those rules. Algebra is much loved by computer scientists because
+computer science is, in some ways, the study of a system of this sort
+and the logic of programming langauges can be framed in algebraic
+terms. Computer science was also born during a time of great progress
+in our understanding of the philosophy and mathematics of axiomatic
+systems and still bears the historical imprint of that time.
+
+This is a beautiful and profound subject, and we are not here to
+criticize it. We are, however, here to study a different set of
+mathematical ideas often bundled together as analysis. If algebra is
+the stuff we make up, analysis is the mathematics we discover; it is
+the collection of mathematical ideas we develop in response to some of
+the mysteries of our world, the fact that objects have entent, the
+fact that they move. It is not as central to our subject, in and of
+itself, as algebra but it is important to many of the applications
+that have driven forward computer-based computations, the simulation
+of physical systems in service of engineering and science, the
+stochastic dynamics of stock markets, the complex modelling of
+climate, the performance of physics-like dynamics in games and, of
+course recently, the optimization of large neural network in machine
+learning. We, as computer science, should learn analysis because it is
+useful in areas we often end up working, because we are interested in
+machine learning and, of course, because it is a beautiful subject.
+
+This distinction is, of course, too simple; there is axiomatic ideas
+in analysis and, as we'll allude to, ideas about proof have been
+important in analysis; algebra in turn, is not solely a mental
+exercise, it gains inspiration from the real world. Most importantly,
+however, is that the greatest progress has always come from bringing
+analysis and algebra together, for example, mathematics in the last
+fifty years has seen incredible progress in geometry which depends on
+a combination of ideas from analysis and algebra. This is all beyond
+this unit, for now we want to revise differentiation.
+
+\section*{The law of fluxations?}
+
+We will start with the original description of calculus due to the two
+scientists who discovered it in the seventeenth century: Newton and
+Leibniz. They based their version of calculus on ``infinitessimals'':
+an \textsl{infinitessimal} was a very small number, a number so small
+that it could be regarded as zero. The difficulty in making sense of
+what this meant, and Leibniz who was also a philosopher invented a
+weird set of ideas about reality to do just that, does not mean it is
+not a useful way of thinking about differentiating.
+
+The idea is to work out how quickly a function $f(x)$ is
+changing. Consider adding a small amount, $\delta x$\footnote{The Greek letter $\delta$, called delta and equivalent in pronounciation to the Latin letter d is often used for small changes.} to $x$ then the change in $f(x)$ will be
+\begin{equation}
+  \delta f(x) = f(x+\delta x) - f(x)
+\end{equation}
+This means that change in $f$ per change in $x$ is
+\begin{equation}
+  \frac{\delta f(x)}{\delta x} = \frac{f(x+\delta x) - f(x)}{\delta x}
+\end{equation}
+This is fine, but $f(x)$ could have any sort of shape and it might
+change how quickly it is changing from $x$ to $x+\delta x$, we want to
+know how much it is changing ``right now'', exactly at $x$. The
+solution is to make $\delta x$ really small and the idea Newton and
+Leibniz had was to define $dx$ as a number so small it is zero once
+you have finished with any dividing and so forth. That this might
+cause problems later on is now obvious, it is a slippery sort of
+notion, but it sort of works, we define the \textsl{derivative} as
+\begin{equation}
+  \frac{df}{dx}=\frac{f(x+dx)-f(x)}{dx}
+\end{equation}
+and this is a measure of the rate $f(x)$ is changing as $x$ changes.
+
+How does this work in practice, lets consider a simple example:
+\begin{equation}
+  f(x)=x^3
+\end{equation}
+Now
+\begin{equation}
+  \frac{df}{dx}=\frac{(x+dx)^3-x^3}{dx}
+\end{equation}
+We can expand out
+\begin{equation}
+  (x+dx)^3=x^3+3x^2dx+3x(dx)^2 + (dx)^3
+\end{equation}
+and so
+\begin{equation}
+  \frac{df}{dx}=3x^2+3xdx+(dx)^2
+\end{equation}
+and then using the rule that $dx$ is so small it is zero
+\begin{equation}
+  \frac{df}{dx}=3x^2
+\end{equation}
+and all is good. This works for any power of $x$ since we know
+\begin{equation}
+  (x+a)^n = \sum_{r=0}^n \left(\begin{array}{c}n\\r\end{array}\right)x^{n-r}a^r
+\end{equation}
+where I am using the bracket notation for the binomial symbol
+\begin{equation}
+  \left(\begin{array}{c}n\\r\end{array}\right)={}_nC_r=\frac{n!}{r!(n-r)!}
+\end{equation}
+Putting this into the definition of the derivative gives
+\begin{equation}
+  \frac{dx^n}{dx}=nx^{n-1}
+\end{equation}
+
+This approach also allows us to derive some basic general rules for differentiating. Consider, for example the sum of two functions.
+\begin{align}
+  \frac{d}{dx}[f(x)+g(x)]&=\frac{f(x+dx)+g(x+dx)-f(x)-g(x)}{dx}\cr
+  &=\frac{f(x+dx)-f(x)}{dx}+\frac{g(x+dx)-g(x)}{dx}\cr
+  &=\frac{df}{dx}+\frac{dg}{dx}
+\end{align}
+or consider multiplying by a constant $c$
+\begin{equation}
+  \frac{d}{dx}[cf(x)]=\frac{cf(x+dx)-cf(x)}{dx}=c\frac{f(x+dx)-f(x)}{dx}=c\frac{df}{dx}
+\end{equation}
+and so differentiation is a linear operation.
+
+A more complicated example is provided by products.
+\begin{equation}
+  \frac{d}{dx}f(x)g(x)=\frac{f(x+dx)g(x+dx)-f(x)g(x)}{dx}
+\end{equation}
+Now, this requires a certain amount of nerve, but from the definition
+\begin{equation}
+  f(x+dx)=f(x)+\frac{df}{dx}dx
+\end{equation}
+and so
+\begin{equation}
+  \frac{d}{dx}f(x)g(x)=\frac{1}{dx}\left[\left(f(x)+\frac{df}{dx}dx\right)\left(g(x)+\frac{dg}{dx}dx\right)-f(x)g(x)\right]
+\end{equation}
+Now, expanding out
+\begin{equation}
+  \frac{df(x)}{dx}f(x)g(x)=\frac{df}{dx}g(x)+f(x)frac{dg}{dx}+\frac{df}{dx}\frac{dg}{dx}dx
+\end{equation}
+and, in the now familiar way, we set the $dx$ term to zero to get the product rule
+\begin{equation}
+  \frac{d}{dx}f(x)g(x)=\frac{df}{dx}g(x)+f(x)frac{dg}{dx}
+\end{equation}
+
+
+\section*{We can differentiate just about anything}
+
+In this way we can derive the derivative of common functions:
+\begin{itemize}
+\item polynomials: $dx^n/dx=nx^{n-1}$
+\item special function:
+\begin{enumerate}
+\item $d\sin{x}/dx=\cos{x}$
+\item $d\cos{x}/dx=-\sin{x}$
+\item $d\exp{x}/dx=\exp{x}$
+\item $d\log{x}/dx=1/x$
+  \end{enumerate}
+\item product rule:
+$$\frac{d}{dx}uv = \frac{du}{dx}v+u\frac{dv}{dx}$$
+\item quotient rule:
+$$\frac{d}{dx}\frac{u}{v}=\frac{\frac{du}{dv}v-u\frac{dv}{dx}}{v^2}$$
+\end{itemize}
+
+This leaves the most powerful rule of all, the chain rule:
+\begin{equation}
+  \frac{du(v(x))}{dx}=\frac{du}{dv}\frac{dv}{du}
+\end{equation}
+This allows us to work out the derivative for function that are writen
+as a composition, a function of a function. This is the machinery that
+means we can differente just about anything that has a derivative and,
+these days, as implemented in autograd in machine learning libraries,
+allows us to differentiate any calculation made on a computer: any
+calculation a computer makes is a composition of simple operations,
+ultimately simple logical operations on bits, and so the chain rule
+can differentiate the computation, in machine learning libraries this
+allows the \textsl{gradient} to be calculated, the gradient, as we
+will see is used to optimize, to find maxima and minima of functions,
+in the case of machine learning, the loss function.
+
+Here is a simple example of the chain rule in action, let
+\begin{equation}
+  f(x)=(2+x^2)^3
+\end{equation}
+We could do this the hard way by expanding out the bracket:
+\begin{equation}
+  f(x)=8+12x^2+6x^4+x^6
+\end{equation}
+and so
+\begin{equation}
+  \frac{df}{dx}=24x+24x^3+6x^5
+\end{equation}
+However, we could also write
+\begin{equation}
+  f(v)=v^3
+\end{equation}
+where
+\begin{equation}
+  v=2+x^2
+\end{equation}
+So
+\begin{equation}
+  \frac{df}{dv}=3v^2
+\end{equation}
+and
+\begin{equation}
+  \frac{dv}{dx}=2x
+\end{equation}
+Substituting back in for $v$ and applying the chain rule:
+\begin{equation}
+  \frac{df}{dx}=6x(2+x^2)^2
+\end{equation}
+which, you can check, is the same as what we got before. In this case
+there was an alternative, albeit more laborious approach but the chain rule works in cases where there is no alternative. For example
+\begin{equation}
+  f(x)=\exp{x^2}
+\end{equation}
+so we let $v=x^2$ and $dv/dx=2x$ while $d\exp{v}/dv=\exp{v}=\exp{x^2}$ and hence
+\begin{equation}
+  \frac{df}{dx}=2x\exp{x^2}
+\end{equation}
+
+\section*{A note on notation}
+
+Notation is what mathematics is good at, the whole glory of
+mathematics is that it allows us to write down and discuss difficult
+abstract ideas. It is surprising then sometimes to reflect on how
+informal mathematical notation often is, this is particularly
+frustrating to some computer science folk whose craft requires
+completely precise notation, in some ways a language like Haskell is
+what mathematics would look like if we weren't all lazy bags of
+meat. This is a quick note on that laziness, it is here to help you if
+you are worried about the notation, but if you weren't worried, don't
+let it worry you.
+
+Anyway, the problems often start with functions, a function is a map
+between spaces, so we might say
+\begin{equation}
+  f:\mathbb{R}\rightarrow\mathbb{R}
+\end{equation}
+and then, if the function is mapping $x$ to $x^3+3$ we could right
+\begin{equation}
+  f:x\mapsto x^3+3
+\end{equation}
+Now, say we wanted to know what $4$ maps to, we would write $f(4)=67$,
+the trouble starts when we write $f(x)$; do we mean the value $x$ goes
+to under the map, or do we mean the function itself, is
+$f(x)\in\mathbb{R}$ or is
+$f(x)\in(\mathbb{R}\rightarrow\mathbb{R})$. Frustratingly for people
+who think of mathematics as an exact and careful process, we sort of
+assume this will be clear by the context.
+
+This can be a bit awkward with differentiation, no one is every really
+sure what $df(x)/dx$ means, is it the differential of a function
+called $f(x)$ or is it the differentiation of $f$ evaluated at $x$, is it
+\begin{equation}
+  \frac{df(x)}{dx}\;\mbox{or}\;\frac{df}{dx}(x)
+\end{equation}
+This is a problem if you write something like
+\begin{equation}
+  \frac{df(2)}{dx}
+\end{equation}
+Is this the differential of $f(x)$ evaluated at $x=2$ or is it the
+differential of $f(2)$; it looks like the latter, but that would be
+silly since $f(2)$ doesn't depend on $x$ and so its differential is
+zero! To avoid this ambiguity we often use the ``restrict to'' notation
+\begin{equation}
+  \left.\frac{df}{dx}\right|_{x=2}
+\end{equation}
+so, if $f(x)=x^3+3$ then
+\begin{equation}
+  \frac{df}{dx}=3x^2
+\end{equation}
+and
+\begin{equation}
+  \left.\frac{df}{dx}\right|_{x=2}=12
+\end{equation}
+This hasn't really cleared up what $d/dx$ is, it is in fact an operator, it maps a function to another function:
+\begin{equation}
+  \frac{d}{dx}:(\mathbb{R}\rightarrow\mathbb{R})\rightarrow(\mathbb{R}\rightarrow\mathbb{R})
+\end{equation}
+but that really is a discussion for another day!
+
+There is another convention that it is useful to mention:
+\begin{equation}
+  \frac{d^2f}{dx^2}=\frac{d}{dx}\frac{df}{dx}
+\end{equation}
+so when writing the derivative of a derivative, we use powers; it
+isn't worth worry about the precise relationship between taking a
+power and taking a sequence of derivative, just think of it as a piece of notation, so the thing on the left hand side is just a convenient way to write the thing on the right hand side,
+\begin{equation}
+  \frac{d^3f}{dx^3}=\frac{d}{dx}\frac{d}{dx}\frac{df}{dx}
+\end{equation}
+and so on.
+
+
+While we are talking about notation, there is another thing to clear
+up; the use of dots and primes. The $d/dx$ notation makes a lot of
+sense and provided you don't think it entitles you to make
+cancellations you can't, it is useful that it makes the chain rule
+look like you are cancelling the $dv$'s. However, to save space we
+sometimes use the following two notations, for functions of $x$ we write
+\begin{equation}
+  f'(x)=\frac{df}{dx}
+\end{equation}
+and for functions of $t$
+\begin{equation}
+  \dot{f}(t)=\frac{df}{dt}
+\end{equation}
+There is no rule that says you can't use a dot for functions of $x$ or
+a prime for functions of $t$, these are just conventions and in a
+paper you should really make it clear what you are doing, but in
+informal mathematical discussion we often switch between $d/dt$ or
+$d/dx$ and a dot or prime without even really noticing we're doing
+it. The prime notation is also used for higher derivatives,
+\begin{equation}
+  f''(x)=\frac{d^2f}{dx^2}
+\end{equation}
+and so on, when it gets inconvenient to write lots of primes, we use a number in brackets:
+\begin{equation}
+  f^{(4)}(x)=\frac{d^4f}{dx^4}
+\end{equation}
+or even, in the general case
+\begin{equation}
+  f^{(n)}(x)=\frac{d^nf}{dx^n}
+\end{equation}
+
+\section*{Summary}
+
+This set of notes revises basic calculus using the old-fashioned
+notion of infinitessimals. We gave a list of standard derivatives and
+looked at the chain rule. 
+
+\end{document}
+
