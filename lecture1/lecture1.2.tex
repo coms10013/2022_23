@@ -1,0 +1,218 @@
+\documentclass[12pt]{article}
+\usepackage{amsfonts, epsfig}
+\usepackage[authoryear]{natbib}
+\usepackage{graphicx}
+\usepackage{fancyhdr}
+\usepackage{amsmath}
+\pagestyle{fancy}
+\lfoot{\texttt{coms10013.github.io}}
+\lhead{Analysis - 1.2 Introduction to differentiation - Conor}
+\rhead{\thepage}
+\cfoot{}
+\begin{document}
+
+\section*{Limits}
+
+The nineteenth century was a glorious one for analysis, mathematians
+like Hamilton, Legendre, Laplace and greatest of all, Gauss, made deep
+and powerful advances that in dynamics and calculus, a sort of
+culmination of the programme begun by Newton and Leibniz. There were,
+however, growing signs that the sloppiness in the definition of the
+differential were causing problems and leading to theorems whose
+proofs were insecure and even false. At the time, with the important
+role mathematics played in philosophy this had profound implications
+in the rise of a sort of anti-realist line of philosophical thought;
+in mathematics though, it lead to an effort to fix the problem and
+through the work of Weierstrass and others, this was achieved and that
+achievement led in turn to a new more flexible approach to calculus
+which continues to mathematics well, and, in particular, gave the
+mathematical framework that made it possible to make describe quantum
+mechanics.
+
+The new, more rigourous, approach to calculus depends on the defining the \textsl{limit}. Consider the function
+\begin{equation}
+  f(x)=\frac{2x(x-1)}{x-1}
+\end{equation}
+It is clear to use that this is equivalent to $x$ and that $f(1)=2$;
+however, if you plug $x=0$ into the equation for $f(x)$ you will get
+zero over zero and we know that doesn't have a value, it is
+undefined. In fact, the logic that tells us that $f(x)$ is $x$
+involves cancelling the $x-1$ above and below the line, and at $x=1$
+that cancelling is equivalent to dividing by zero. So what gives?
+Well, most of time, away from the special cases of interest to
+mathematicians, we regard the equals as good as long as it holds
+almost everywhere, everywhere except at specific points, so we would
+say without hesitation that
+\begin{equation}
+  f(x)=\frac{2x(x-1)}{x-1}=2x
+\end{equation}
+A mathematician who had need to worry about these things might at a
+``a.e.'' beside that equation to mean it works almost everywhere, that
+is everywhere except at $x=1$. We don't need to do that!
+
+Our interest however is not in the almost everywhere business, here I want to look at this as an example of a limit. The function
+\begin{equation}
+  f(x)=\frac{x(x-1)}{x-1}
+\end{equation}
+might not make sense at $x=1$ and so we might say
+\begin{equation}
+  f(x)=\left\{\begin{array}{ll}x(x-1)/(x-1)&x\not= 1\\\mbox{undefined}&x=1\end{array}\right.
+  \end{equation}
+but we'd still sort of ``know'' the value at $x=1$ as the value that
+you'd guess if you looked at the values for $x$ very close to one. This is the idea of the limit, we would say
+\begin{equation}
+  \lim_{x\rightarrow 1}f(x)=2
+\end{equation}
+to mean, if we look at the values of $f(x)$ as close as you please to
+$x=1$ you'd see $f(x)$ was clearly going to two, nonewithstanding the
+fact that $f(x)$ is actually undefined at $x=1$. This is the sort of
+situation we need to deal with in defining the derivative
+\begin{equation}
+  \frac{f(x+h)-f(x)}{h}
+\end{equation}
+doesn't make sense at $h=0$ since it is zero over zero at there, but
+we'd like to know what the value is at $h=0$ based on what it is doing
+when $h$ is very close to zero. In short, we want to define
+\begin{equation}
+  \frac{df}{dx}=\lim_{h\rightarrow 0}\frac{f(x+h)-f(x)}{h}
+\end{equation}
+All we are lacking is a rigorous definition of the limit, but that we
+can now provide.
+
+We don't want to make too much of a fuss of the so called
+epsilon-delta box definition of the limit; in the use we make of
+analysis it doesn't lead to anything\footnote{This isn't completely true, cryptography and some part of algorithms do make use of limits in a way that requires a good understanding of epsilon-delta boxes, but for us, here, we'll look at it briefly and then move on.}, it is just reassuring to know that there is a rigorous definition. The definition is this:
+\begin{equation}
+  \lim_{x\rightarrow a}f(x)=b
+\end{equation}
+if and only if for any $\epsilon>0$ there exists an $\delta>0$ such
+that if $|x-a|<\delta$ then $|f(x)-b|<\epsilon$; or, written in the
+language so dear to mathematicians in the early twentieth century:
+\begin{equation}
+  \lim_{x\rightarrow a}f(x)=b\iff\forall\epsilon>0\exists\delta>0\;\mbox{s.t.}\;|x-a|<\delta\implies|f(x)-b|<\epsilon
+\end{equation}
+where $\forall$ is for all, $\exists$ is exists, s.t. means such that
+and $\epsilon$ is the Greek letter epsilon, another letter often used
+for small things. Anyway, the gist of all this is a sort of test, I
+say that the limit of $f(x)$ as $x$ goes to $a$ is $b$ and you say,
+well what about $\epsilon$, can you make $f(x)$ within $\epsilon$ of
+$b$ and I say, why yes, if $x$ is within $\delta$ of $a$ then $f(x)$
+will indeed be within $\epsilon$ of $b$. If this works for any
+$\epsilon$ then we have a limit.
+
+This allows us to define a \textsl{continuous} function, a continous
+function is one the always equals its limit, that is $f(x)$ is continous if and only if
+\begin{equation}
+  f(a)=\lim_{x\rightarrow a}f(x)
+\end{equation}
+for all $x$ in its domain. As mentioned, the limit gives us a definition of the derivative that avoids the hazy notion of the infinitessimal
+\begin{equation}
+  \frac{df}{dx}=\lim_{h\rightarrow 0}\frac{f(x+h)-f(x)}{h}
+\end{equation}
+Of course, the challenge now would be to rederive all the laws of
+calculus, the product rule and so on, using this definition and this
+is what mathematicians have done. Finally we note that a
+\textsl{smooth} function is one whose derivative is continuous.
+
+\section*{Extrema}
+
+One common practical use of the derivative is finding maxima and
+minima; in real use this is often done using a numerical scheme, this
+still involves the derivative and we'll return to this topic
+later. For now though we look at cases where we can find the extrema
+directly, the main idea is pretty simple, if a function is at a
+maximum or a minimum it isn't changing and so its derivative is zero.
+
+Here is an example:
+\begin{equation}
+  f(x)=\exp{(-x^2)}
+\end{equation}
+This is like a Gaussian curve, future versions of these notes will
+have figures, but for now you can google what the curve looks
+like. Anyway
+\begin{equation}
+  \frac{df}{dx}=-2x\exp{(-x^2)}
+\end{equation}
+and the exponential part is only zero as $x$ goes to plus or minus
+infinity, so the only way this can be zero is if $x=0$, telling us
+that if $f(x)$ has an maximum or a minimum it has to be at $x=0$; in
+fact it has a maximum at $x=0$.
+
+It is important to notice that having a zero derivative is a necessary
+but not a sufficient condition for having a maximum or minimum; consider
+\begin{equation}
+  f(x)=x^3
+\end{equation}
+This has derivative
+\begin{equation}
+  \frac{df}{dx}=3x^2
+\end{equation}
+which is zero at $x=0$ but if you sketch the curve it doesn't have an
+extremum at $x=0$; the rate of change is zero, the curve is sort of
+getting flatter and flatter until at $x=0$ it sort of instantaneously
+stops going up before deciding to continue going up. We call a point where $df/dx=0$ a \textsl{critical point}; this can be an extremum, a max or min, but it doesn't have to be: an extremum is always a critical point but not visa versa.
+
+Now, lets think about what happens at a maximum, as you approach a
+maximum from the left the rate of change is positive, you are going
+up, then at the maximum the rate of change is zero, it stops going up
+and then you start going down, the rate of change is negative. That
+implies that at a maximum the rate is change is zero but in the
+context of decreasing, in other words the rate of change of the rate
+of change is negative. In fact, if $x$ is critical point, $df/dx=0$, and
+\begin{equation}
+  \frac{d^2f}{dx}<0
+\end{equation}
+then $x$ is a maximum, similarly if $x$ is a critical point and
+\begin{equation}
+  \frac{d^2f}{dx}>0
+\end{equation}
+then it is a minimum. If it is zero then we are sure, it could be a
+critical point that isn't an extremum, for example, if $f(x)=x^3$ then
+\begin{equation}
+  \frac{d^2f}{dx}=6x
+\end{equation}
+and this is zero at $x=0$, or it could still be an extremum, if $f(x)=x^4$ then
+\begin{equation}
+  \frac{d^2f}{dx}=12x^2
+\end{equation}
+which is also zero at the critical point, $x=0$; so here it is a
+maximum, just a sort of flat one. In other words, typically you find
+the extrema by finding the places with zero derivative and you then
+check by calculating the second derivative; for some special critical
+points the second derivative is zero, so you need to do some more messing.
+
+As a final example lets go back to
+\begin{equation}
+  f(x)=\exp{(-x^2)}
+\end{equation}
+This has, using the chain and product rules
+\begin{equation}
+  \frac{d^2f}{dx^2}=-2\exp{(-x^2)}+4x^2\exp{(-x^2)}
+\end{equation}
+so
+\begin{equation}
+  \left.\frac{d^2f}{dx^2}\right|_{x=0}=-2<0
+\end{equation}
+telling us the critical point at $x=0$ is a maximum.
+
+
+\section*{Summary}
+
+Here we look at the definition of the limit:
+\begin{equation}
+  \lim_{x\rightarrow a}f(x)=b\iff\forall\epsilon>0\exists\delta>0\;\mbox{s.t.}\;|x-a|<\delta\implies|f(x)-b|<\epsilon
+\end{equation}
+and use that to define the derivative
+\begin{equation}
+  \frac{df}{dx}=\lim_{h\rightarrow 0}\frac{f(x+h)-f(x)}{h}
+\end{equation}
+We define a continuous function as one that is equal to its limit at
+every point and a smooth one as one with a continuous derivative. We
+define a critical point as a point where the derivative is zero and
+note that all extrema are critical points; if the second derivative at
+a critical point is negative the critical point is a maximum, if
+positive a minimum. It is zero it could be either, or it might not be
+an extremum at all.
+
+\end{document}
+
