@@ -1,0 +1,259 @@
+%ps1.tex
+%notes for the course Probability and Statistics COMS10011 
+%taught at the University of Bristol
+%2019_20 Conor Houghton conor.houghton@bristol.ac.uk
+
+%To the extent possible under law, the author has dedicated all copyright 
+%and related and neighboring rights to these notes to the public domain 
+%worldwide. These notes are distributed without any warranty. 
+
+\documentclass[11pt,a4paper]{scrartcl}
+\typearea{12}
+\usepackage{graphicx}
+%\usepackage{pstricks}
+\usepackage{listings}
+\usepackage{color}
+\lstset{language=C}
+\usepackage{fancyhdr}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\pagestyle{fancy}
+\lhead{\texttt{github.com/coms10013/2022\_23} and  \texttt{coms10013.github.io}}
+\lfoot{COMS10013 - ws4 - Conor}
+\begin{document}
+
+\section*{COMS10013 - Analysis - WS4}
+
+These worksheets are partly, well mostly, taken from worksheets prepared by Chloe Martindale.
+
+\subsection*{Useful facts and reminders}
+
+\begin{itemize}
+\item An \textbf{ordinary} differential equation is one with only one variable,
+  an $n$-\textbf{order} ordinary differential equation is one where the highest
+  derivative is the $n$-th derivative, a \textbf{homogeneous} ordinary
+  differential equation is one where every term includes the unknown
+  function and a \textbf{linear} ordinary differential equation, roughly
+  speaking, is one where the unknown function only appears ``on its
+  own''.
+\item \textbf{Direct integration}. Sometimes the easiest way to solve an ordinary differential equation is by direct integration, here is an example:
+  \begin{equation}
+    \frac{df}{dt}=rf
+  \end{equation}
+  for $r$ a constant. Rewrite this as
+  \begin{equation}
+    \frac{df}{f}=rdt
+  \end{equation}
+  The fact you can move the $dt$ to the other side isn't because $df/dt$ is a fraction, it isn't, it is because there is a theorem, the fundamental theorem of calculus, that says this works but, in a sense, it is because this works that $df/dt$ is a good notation. Now integrate both sides to get
+  \begin{equation}
+    \log{f}=rt+C
+  \end{equation}
+  where $C$ is an integration constant and this can be rewriten as
+  \begin{equation}
+    f=Ae^{rt}
+  \end{equation}
+  where $A$ is also a constant, a rewriting of $C$.
+
+  
+\item \textbf{Ansatz}. One of our greatest assets is our ability to solve first order
+  linear differential equations, even ones where the coefficients are
+  not constant. When the coefficients are constant:
+  \begin{equation}
+    \frac{df}{dt}=rf
+  \end{equation}
+  one of the easiest approaches to this is to use an
+  \textbf{ansatz}, a guess:
+  \begin{equation}
+    y(t)=A\exp{(\lambda{}t)}
+  \end{equation}
+  and then to work out what $\lambda$ is from the differential
+  equation by substituting in, $A$ is typically determined by the
+  initial conditions, so if you are told $y(0)$ you substitute $t=0$ in the right hand side so $A=y(0)$.
+\item \textbf{The particular and general solutions} If the equation is inhomogenous, the ansatz will often work then as well, but will give a value for $A$, this is called the \textbf{particular solution}; to get the general solution you will need to also solve the corresponding homogenous equation, the one you get by dropping the inhomogenous part, if you add this solution to the particular solution you still get a solution to the inhomogenous equation, the \textbf{general solution}. Here is an example
+  \begin{equation}
+    \dot{y}=-y+\exp{3t}
+  \end{equation}
+  Substitute $y=A\exp{\lambda t}$ to get
+  \begin{equation}
+    \lambda Ae^{\lambda t}=-Ae^{\lambda t}+e^{3t}
+  \end{equation}
+  so the ansatz solves the equation if $\lambda=3$ and $A=1/4$. Now solve
+  \begin{equation}
+    \dot{y}=-y
+  \end{equation}
+  The ansatz says $y=A\exp{-t}$ solves this and so
+  \begin{equation}
+    y=Ae^{-t}+\frac{1}{4}e^{3t}
+  \end{equation}
+  is the general solution to the original equation; you can check this. $A$ is usually fixed by the inital condition so if $y(0)=1$ for example then $A=3/4$.
+  
+\item \textbf{Integrating factor} Another approach to the same class of equations, the integrating factor has the advantage that it also works for equations with non-constant coefficients, here though we consider the constant coefficient case. If
+  \begin{equation}
+    \frac{df}{dt}+rf=g(t)
+  \end{equation}
+  multiply both sides by $\exp{rt}$ and apply the product rule `backwards' to get
+  \begin{equation}
+    \frac{d}{dt}fe^{rt}=g(t)e^{rt}
+  \end{equation}
+  and then multiply by $\exp{(-rt)}$ and integrate.
+  
+\end{itemize}
+
+
+\subsection*{Questions}
+
+These are the questions you should make sure you work on in the workshop.
+
+\begin{enumerate}
+
+\item \textbf{A linear accelerated motion question}. A train is travelling from Bristol to London Paddinton at the maximum speed of 55.9 m/s, 125 mph, when the driver activates the emergency break. This causes the train to decelerate uniformly at 1.2 m/s$s^2$. How far will the train travel until it stops and how long will this take, in seconds. Do this using differential equations, for example:
+  \begin{equation}
+    \frac{dv}{dt}=-1.2
+  \end{equation}
+  not by looking up formulas.
+
+\item \textbf{Types of differential equations}
+  Write down (but don't solve) an example of a differential equation that is:
+  \begin{itemize}
+  \item[(a)] First-order, linear but not homogeneous, with constant coefficients.
+  \item[(b)] First-order, linear, homogeneous but without constant coefficients.
+  \item[(c)] Second-order, linear, homogeneous, with constant coefficients.
+  \item[(d)] Second-order, linear, not homogeneous, without constant coefficients.
+  \end{itemize}
+	
+\item \textbf{Differential equations} Solve the following, linear,
+  homogeneous, first-order, constant coefficients, differential
+  equations once using separation of variables and once with the
+  \emph{ansatz}.
+	\begin{itemize}
+		\item[(a)] $\dot{y}(t) - y(t) = 0$ with initial condition $y(0) = 2$.
+		\item[(b)] $\dot{y}(t) + 3y(t) = 0$ with initial condition $y(3) = 3$.
+		\item[(c)] $\dot{y}y(t) = 0$ with  initial condition $y(5) = 2$.
+		\item[(d)] $\dot{y}(t) + 5y(t) = 0$ with initial condition
+                  $y(1) = 1$.
+	\end{itemize}
+
+\end{enumerate}
+        
+\subsection*{Extra questions}
+
+These are extra questions you might attempt in the workshop or at a
+later time; in fact these questions are tricky so you might want to
+come back to them later when you've had some more lectures.
+
+\begin{enumerate}
+
+	
+	\item (**) \textbf{Solutions as a vector space}	
+	The aim of this exercise is to prove most of the following theorem:
+	the solutions to the second-order linear homogeneous differential equation
+	$a\ddot{y}(t) + b\dot{y}(t) + cy(t) = 0$ form a vector space. Note that this also follows from a theorem stated in the lecture notes. Prove:
+	\begin{itemize}
+		\item[(a)] If $f(t)$ and $g(t)$ are two solutions to this differential equation, then $h(t) = f(t) + g(t)$ is also a solution to this differential equation.
+		\item[(b)] If $f(t)$ is a solution to this differential equation,
+		and $s$ is any integer, then $k(t) = s \cdot f(t)$ is also a solution to this differential equation.
+		\item[(c)] The function $f_0(t) = 0$ (the function that is zero for all $t$) is a solution to the differential equation.
+	\end{itemize}
+	Technically we would also have to show that addition of
+        solutions is commutative and associative, but this is tedious
+        and doesn't have anything to do with differential equations -
+        the way to prove this would just be to show it for all
+        functions. So you don't have to prove that here.
+	
+	Note that this theorem holds even if $a,b,c$ are functions of
+        $t$, same proof, you never had to differentiate these
+        constants, and for any order of linear differential equation,
+        not just second order. The theorem doesn't hold for
+        inhomogeneous equations however: for a challenge, can
+        you see which parts of the proof don't work for $a\ddot{y}(t) +
+        b\dot{y}(t) + cy(t) = d$ and for which $d$?
+	
+	\item \textbf{Radioactive decay}
+	This is the standard example from physics to motivate differential equations.
+	Marie Sk\l{}odowska–Curie discovered the element Radium in the late 19$^\text{th}$ century, together with her husband Pierre. Her notebooks on which she recorded her discoveries are so radioactive that they are kept locked in lead boxes.
+	
+	An atom of Radium-226 normally decays into an alpha particle,
+        a Helium nucleus, and an atom of Radon-222. Each atom has a
+        fixed probability of decaying in a fixed time period, so if
+        you have a box of radium then the number of decays you will
+        observe in a fixed, small time period is proportional to the
+        number of atoms of radium you had to start with.
+	
+	The standard way to write this is $\frac{dy}{dt} = cy$, where
+        $c$ is a negative constant, or more suggestively $dy = cy\,dt$
+        which exactly captures the following statement: the change in
+        the number of atoms ($dy$) that you observe is proportional
+        (via $c$) to the number of atoms you started with ($y$) and
+        the change in time ($dt$) during your observation, e.g., the
+        length of time you observe for.  We recognise this as a
+        differential equation and can immediately derive the
+        radioactive decay equation $y(t) = Ae^{-rt}$ where $A = y(0)$
+        is the number of atoms you started with and $r = -c$ is the
+        rate of decay ($r$ is positive).
+	
+	In nuclear physics, the half-life $\lambda$ is the time it
+        takes for half of a given quantity of radioactive substance to
+        decay.
+	
+	\begin{itemize}
+		\item[(a)] Assuming $t$ is measured in years, find a
+                  formula for the half-life $\lambda$ in years as a
+                  function of the decay constant $r$ and vice versa.
+		\item[(b)] Given that Radon-226 has a half-life of
+                  1600 years, what is its rate of decay $r$?
+	\end{itemize}		
+
+        \item \textbf{A non-linear example} The example from physics
+          about is about decay, the obvious corresponding example from
+          biology population growth, if every squirrel has $r$ baby
+          squirrels each year and squirrels can start having babies as
+          soon as they are born and leaving out squirrel death then
+          the number of squirrels satisfies:
+          \begin{equation}
+            \frac{dN}{dt}=rN
+          \end{equation}
+          and since the solution is $N=A\exp{rt}$ this explodes in a
+          Malthusian disaster with a one metre deep layer of squirrels coating the earth after only
+          \begin{equation}
+            t=(\log{96000000}-\log{A})/r=18/r
+          \end{equation}
+          years, which even for $r=1$ is a problem; a child born today
+          would drown in squirrels before reaching adulthood.\\ \\ Now
+          there are a number of incorrect approximations, the
+          reproductive precociousness and immortality of squirrels
+          but, while these will change the precise predicted time to
+          the squirrel singularity, they won't stop it. However, we
+          realise that the differential equation ignores the resource
+          requirements of squirrels, their population is limited by
+          the availability of nuts; if there are too many squirrels
+          there aren't enough nuts for them all and the population
+          growth slows. In the language of ecology there is a limited
+          \textsl{carrying capacity} for squirrels.\\
+          \\
+          This is reflected in the logistic equation introduced by Pierre Fran\c{c}ois Verhulst in 1838; this equation looks like
+          \begin{equation}
+            \frac{df}{dt}=rf(1-f)
+          \end{equation}
+In this version the carrying capacity has been set to one so $f$ is
+the population as a fraction of the carrying capacity; the equation
+says that the rate of growth of $f$ depends on $f$, the number of
+squirrels, and on $1-f$, the amount of resource not already consumed,
+the amount of uneaten nuts. Notice that when $f$ gets close to one the
+growth of the population slows.\\
+\\
+This equation is non-linear so it can't be solved by the methods used for linear equations. Many important non-linear equations can't be solved but this one case, by direct integration. The fact you need is that
+\begin{equation}
+  \frac{1}{f(1-f)}=\frac{1}{f}+\frac{1}{1-f}
+\end{equation}
+
+
+
+
+          
+        
+\end{enumerate}
+
+
+
+\end{document}
