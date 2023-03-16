@@ -1,0 +1,93 @@
+%ps1.tex
+%notes for the course Probability and Statistics COMS10011 
+%taught at the University of Bristol
+%2019_20 Conor Houghton conor.houghton@bristol.ac.uk
+
+%To the extent possible under law, the author has dedicated all copyright 
+%and related and neighboring rights to these notes to the public domain 
+%worldwide. These notes are distributed without any warranty. 
+
+\documentclass[11pt,a4paper]{scrartcl}
+\typearea{12}
+\usepackage{graphicx}
+%\usepackage{pstricks}
+\usepackage{listings}
+\usepackage{color}
+\lstset{language=C}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\lhead{\texttt{github.com/coms10013/2022\_23} and  \texttt{coms10013.github.io}}
+\lfoot{COMS10013 - ws1 - Conor}
+\begin{document}
+
+\section*{COMS10013 - Analysis - WS1 outline solutions}
+
+These are outline solutions to the main questions in worksheet 1, solutions to the other questions will also appear.
+
+
+
+\begin{enumerate}
+
+\item Differentiate the following functions with respect to $x$: mostly this will mean using the chain rule.
+\begin{enumerate}
+\item $3x^2$: just use the polynomial rule to get $6$.
+\item $(x+2)^2$: et $u=x+2$ with $du/dx=1$ to get $2(x+2)$, don't square it out to get $x^2+4x+4$, differentiating this will of course give the correct answer $2x+4=2(x+2)$ but is more work.
+\item $ae^{cx}$ where $a$ and $c$ are constants: use $u=cx$ with $du/dx=c$ to get $ac\exp{cx}$; rather than do a $u$ substitution, most people just remember this one.
+\item $\exp{x^2}$: this is a bit harder, $u=x^2$ gives $du/dx=2x$ and $d\exp{u}/du=\exp{u}=\exp{x^2}$ so the answer is $2x\exp{x^2}$.
+\item $\sin^2{x}+\cos^2{x}$: this is a trick question, $\sin^2{x}+\cos^2{x}=1$ by Pythagorous's theorem, so the answer is zero. However, to do it the long way, $d\sin^2{x}/dx=du^2/du\,du/dx$ where $u=\sin{x}$ so
+  \begin{equation}
+    \frac{d\sin^2{x}}{dx}=2\sin{x}\cos{x}
+  \end{equation}
+  The same line of thought gives
+  \begin{equation}
+    \frac{d\cos^2{x}}{dx}=-2\sin{x}\cos{x}
+  \end{equation}
+  and adding them gives zero, as expected.
+\item $\cos^2{x}-\sin^2{x}$: From our discussion above this is $-4\sin{x}\cos{x}$. Another way to do this would be to remember that $\cos{2x}=\cos^2{x}-\sin^2{x}$.
+\item $\exp{1/x}$: usual thing now, $u=1/x$ so $du/dx=-1/x^2$ using $1/x=x^{-1}$ and the usual rule for powers, hence
+  \begin{equation}
+    \frac{d}{dx}e^{1/x}=-\frac{1}{x^2}e^{1/x}
+  \end{equation}
+\end{enumerate}
+
+\item Find the local minima and maxima of $y=x^5-3x^2+6$: so
+  \begin{equation}
+    \frac{dy}{dx}=5x^4-6x=x(5x^3-6)
+  \end{equation}
+  So, note for next year, make these numbers a bit more conventient, but basically there are critical points at $x=0$ and $x$ at the cube root of $6/5$, the second derivative is
+  \begin{equation}
+    \frac{d^2y}{dx^2}=20x^3-6
+  \end{equation}
+  At $x=0$ this is -6 and so that's a maximum, at $x=\sqrt[3]{6/5}$ this is
+  \begin{equation}
+    \left.\frac{d^2y}{dx^2}\right|_{x=\sqrt[3]{6/5}}=20\times\frac{6}{5}-6=18
+  \end{equation}
+  so this is a minimum.
+  
+\item Find the partial derivatives of $z(x,y)=5x^2y+2x\sin{y}$. This is easier than you'd think, for $x$ derivative think of $y$ as constant and visa versa:
+  \begin{equation}
+    \frac{\partial z}{\partial x}=10xy+2\sin{y}
+  \end{equation}
+  and
+  \begin{equation}
+    \frac{\partial z}{\partial y}=5x^2+2x\cos{y}
+  \end{equation}
+
+\item Find the gradient of $z(x,y)=(x+y^2)^2$. So first, using the chain rule
+  \begin{equation}
+    z_x=2(x+y^2)
+  \end{equation}
+  and
+  \begin{equation}
+    z_y=4y(x+y^2)
+  \end{equation}
+  Putting them together gives
+  \begin{equation}
+    \nabla(z)=[2(x+y^2),4y(x+y^2)]
+  \end{equation}
+  
+
+  
+\end{enumerate}
+
+\end{document}
