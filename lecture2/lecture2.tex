@@ -1,0 +1,40 @@
+\documentclass[12pt]{article}
+\usepackage{amsfonts, epsfig}
+\usepackage[authoryear]{natbib}
+\usepackage{graphicx}
+\usepackage{fancyhdr}
+\usepackage{amsmath}
+\pagestyle{fancy}
+\lfoot{\texttt{coms10013.github.io}}
+\lhead{Analysis - 2 Partial derivatives - Conor}
+\rhead{\thepage}
+\cfoot{}
+\begin{document}
+
+\section*{Many dimensions}
+
+In the previous lecture we looked at differenciation, but only in one
+dimension, $f(x)$ for example. Often we are interested in function of
+more than dimension, $z(x,y)$, the height of the ground at a point
+$(x,y)$; the functions of physics, temperature for example, that have
+a value for every point $(x,y,z)$, the loss function of an deep
+learning network that depends on million of parameters. All of these
+and many more. It is natural to ask how differentiation works for
+functions of more than one variable, the laws of physics depends on
+it, as does optmization a deep learning network.
+
+In fact, the definitions start out fairly straight forward. The derivative with respect to $x$ tells us the rate of change as $x$ changes, say $f(x,y)$:
+\begin{equation}
+  \frac{\partial f}{\partial x}=\lim_{h\rightarrow 0}\frac{f(x+h,y)-f(x)}{h}
+\end{equation}
+Basically the $y$ does nothing while the derivative in $x$ is being calculated. You will notice that the notation has changed slightly, with $\partial f/\partial x$ having the curly $d$, pronounced ``del'' or ``partial''. This is an old notation intended to distinguish what we are looking at here, partial derivatives, from the so called total derivative. This happens when one of the variables depends on the other, say, for example you have a path in $(x,y)$ space you might write it as $(x,y(x))$ so changing $x$ will change the function in two ways, once because $x$ itself changes and a second time because changing $x$ changes $y$. 
+
+
+\section*{Summary}
+
+This set of notes revises basic calculus using the old-fashioned
+notion of infinitessimals. We gave a list of standard derivatives and
+looked at the chain rule. 
+
+\end{document}
+
