@@ -1,0 +1,177 @@
+
+\documentclass[11pt,a4paper]{scrartcl}
+\typearea{12}
+\usepackage{graphicx}
+%\usepackage{pstricks}
+\usepackage{listings}
+\usepackage{color}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\lstset{language=C}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\lhead{\texttt{github.com/coms10013/2022\_23} and  \texttt{coms10013.github.io}}
+\lfoot{COMS10013 - ws2 - Conor}
+\begin{document}
+
+\section*{COMS10013 - Analysis - WS2 outline solutions}
+
+These are outline solutions to the main questions in worksheet 1, solutions to the other questions will also appear.
+
+
+\begin{enumerate}
+
+\item \textbf{Gradients and Hessians} Let $z(x,y) = x^2y + 3xy^2 + xy$.
+	\begin{itemize}
+	\item[(a)] Find the gradient of $z(x,y)$.
+          \begin{equation}
+            \nabla(z)=
+          \left(\begin{array}{c} \partial z/\partial x \\
+		                    \partial z/\partial y\end{array}\right)
+		                    =
+		              \left(\begin{array}{c}
+		              2xy + 3y^2 + y \\
+		              x^2 + 6xy + x
+		              \end{array}\right).\end{equation}
+	\item[(b)] Find the derivative of $z(x,y)$ along the vector $\left(\begin{array}{c} 3 \\ 1 \end{array}\right).$
+          \begin{equation}
+          \nabla z \cdot \left(\begin{array}{c}
+		3 \\ 1
+		\end{array}\right) 
+		= 
+		\left(\begin{array}{c}
+		              2xy + 3y^2 + y \\
+		              x^2 + 6xy + x
+		              \end{array}\right)
+		              \cdot 
+		              \left(\begin{array}{c}
+		3 \\ 1
+		\end{array}\right) 
+		= x^2 + 9y^2 + 12xy + x + 3y.
+\end{equation}
+        \item[(c)] Compute $\nabla_{\tiny\left(\begin{array}{c} 3 \\ 1 \end{array}\right)} z \left(\left(\begin{array}{c} 2 \\ 0 \end{array}\right)\right)$: plug in $(x,y)=(2,0)$ to get $2^2 + 0 + 0 + 2 + 0 = 6$.
+        \item[(d)] What is the Hessian of $z(x,y)$? So we have $z_x=2xy+3y^2+y$ and $z_y=x^2+6xy+x$, differentiating again gives $z_{xx}=2y$ and $z_{xy}=2x+6y+1$ and $z_{yy}=6x$ and $z_{yx}=2x+6y+1$ and we note that $z_{xy}=z_{yx}$ as it will be for any normal function. Hence, the Hessian is
+          \begin{equation}
+            H=\left(\begin{array}{cc}2y&2x+6y+1\\2x+6y+1&6x\end{array}\right)
+          \end{equation}
+\end{itemize}
+
+	
+	\item \textbf{Extremal points in two dimensions}; this question is pretty hard!
+	\begin{itemize}
+		\item[(a)] Find the local extrema, and determine their types, for
+		  \[z(x,y) = x^3 + y^3 - \frac{1}{2}(15x^2 + 9y^2) + 18x + 6y + 1.\]
+		\item[(b)] Find the local extrema, and determine their types, for
+		\[z(x,y) = 3xy^2 - 30y^2 + 30xy - 300y + 2x^3 - 15x^2 + 111x + 7.\]
+	\end{itemize}
+	Solutions:
+	\begin{itemize}
+		\item[(a)] Compute the gradiant first:
+		\[\nabla z = \left(\begin{array}{c}
+			3x^2 - 15x + 18 \\
+			3y^2 - 9y + 6
+		\end{array}\right).\]
+		The top entry is zero if and only if $x = 2$ or 3 and the bottom entry is 
+		zero if and only if $y = 1$ or 2.
+		So there are 4 possible extremal points:
+		\[(2,1),\, (2,2),\, (3,1),\, (3,2).\]
+		To determine their types, we compute the Hessian
+		\[H = \left(\begin{array}{cc}
+		6x - 15 & 0 \\
+		0 & 6y - 9
+		\end{array}\right),\]
+		which has determinant $\det(H) = (6x-15)(6y-9) = 9(2x-5)(2y-3)$.
+		At
+		\begin{itemize}
+			\item $(2,1)$, $\det(H) = 9\cdot -1 \cdot -1 > 0$ and $6x - 15 = -3 < 0$, so
+			$(2,1)$ is a local maximum.
+			\item $(2,2)$, $\det(H) = 9\cdot -1 \cdot 1 < 0$ so $(2,2)$ is a saddle point.
+			\item $(3,1)$, $\det(H) = 9\cdot 1 \cdot -1 < 0$ so $(3,1)$ is a saddle point.
+			\item $(3,2)$, $\det(H) = 9\cdot 1 \cdot 1 > 0$ and $6x - 15 = 3 > 0$, so
+			$(3,2)$ is a local minimum.
+		\end{itemize}
+		\item[(b)] The gradient is
+		\[\nabla z = \left(\begin{array}{c}
+		3y^2 + 30y + 6x^2 - 30x + 111 \\
+		6xy - 60y + 30x - 300
+		\end{array}\right).\]
+		Look first at the second entry
+		$6(xy-10y+5x-50)$.
+		We want to understand when this is $=0$, 
+		which then gives us an equation we can rearrange and solve:
+		\[y(x-10) + 5x - 50 = 0 \Rightarrow y = 5\frac{10-x}{x-10} = -5,\]
+		for $x \neq 10$. When $x = 10$,
+		the second entry gives us
+		$60y-60y + 300 - 300 = 0$,
+		so the second entry is 0 when $x = 10$ or $y = -5$.
+		Plugging in $y = -5$ to the first entry and setting it to 
+		zero gives us an
+		equation for $x$:
+		\[0 = 6x^2 - 30x + 36 = 6(x^2 - 5x +6),\]
+		which has roots at $x = 2$ and 3.
+		Plugging in $x = 10$ to the first entry and setting it to zero
+		gives us an equation for $y$:
+		\[0 = 3y^2 + 30y + 411 = 3(y^2 + 10y + 137),\]
+		which has no real solutions.
+		So the only possible extrema are
+		\[(2,-5) \text{ and } (3,-5).\]
+		To check their types, we look at the Hessian
+		\[H = \left(\begin{array}{cc}
+		12x - 30 & 6y+30 \\
+		6y +30 & 6x - 60
+		\end{array}\right)
+		=6\left(\begin{array}{cc}
+		2x-5 & y + 5 \\
+		y + 5 & x-10
+		\end{array}\right),\]
+		which has determinant 
+		$$\det(H) = 36\cdot ((2x-5)(x-10)-(y+5)^2).$$
+		Then, at
+		\begin{itemize}
+			\item $(x,y) = (2,-5)$ we get $\det(H) = 36\cdot ((-1\cdot-8) - 0) > 0$ and $2x-5 = -1 < 0$ so $(2,-5)$ is a local maximum.
+			\item $(x,y) = (3,-5)$ we get $\det(H) = 36\cdot ((1\cdot -7) - 0) < 0$ so $(3,-5)$ is a saddle point.
+		\end{itemize}
+\end{itemize}
+        
+	\item \textbf{Taylor series}
+	\begin{itemize}
+	\item[(a)] Compute the Taylor series of $e^x$ at $x=2$: well $de^x/dx=e^x$ so we get
+          \begin{equation}
+            e^{2+\delta}=e^2\left[1+\sum_{n=1}^\infty\frac{\delta^n}{n!}\right]
+          \end{equation}
+	\item[(b)] Compute the Taylor series of $1/(1-x)^2$ at $x=0$: so this one is cool,
+          \begin{equation}
+            \frac{d}{dx}\frac{1}{(1-x)^2}=\frac{2}{(1-x)^3}
+          \end{equation}
+          and
+          \begin{equation}
+            \frac{d^2}{dx^2}\frac{1}{(1-x)^2}=\frac{6}{(1-x)^4}
+          \end{equation}
+          if you do a few more you might guess
+          \begin{equation}
+            \frac{d^n}{dx^n}\frac{1}{(1-x)^2}=\frac{(n+1)!}{(1-x)^{n+2}}
+          \end{equation}
+          and you can prove this is true by induction. Now
+          \begin{equation}
+            \left.\frac{d^n}{dx^n}\frac{1}{(1-x)^2}\right|_{x=0}=(n+1)!
+          \end{equation}
+          so
+          \begin{equation}
+            \frac{1}{(1-x)^2}=\sum_{n=0}^{\infty} (n+1)x^n.
+          \end{equation}
+	  \item[(c)] Compute the Taylor series of $1/x$ at $x=2$. Again if you differentiate a few times you'll see
+            \begin{equation}
+              \frac{d^n}{dx^n}\frac{1}{x}=\frac{(-1)^nn!}{x^{n+1}}
+            \end{equation}
+            and substituting that in to the Taylor series gives
+            \begin{equation}
+              f(2+\delta)	= 2\sum_{n=0}^{\infty} (-1)^n \left(\frac{\delta}{2}\right)^n
+            \end{equation}
+            
+	\end{itemize}
+	
+        
+\end{enumerate}
+
+\end{document}
