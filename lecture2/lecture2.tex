@@ -27,7 +27,52 @@ In fact, the definitions start out fairly straight forward. The derivative with 
 \begin{equation}
   \frac{\partial f}{\partial x}=\lim_{h\rightarrow 0}\frac{f(x+h,y)-f(x)}{h}
 \end{equation}
-Basically the $y$ does nothing while the derivative in $x$ is being calculated. You will notice that the notation has changed slightly, with $\partial f/\partial x$ having the curly $d$, pronounced ``del'' or ``partial''. This is an old notation intended to distinguish what we are looking at here, partial derivatives, from the so called total derivative. This happens when one of the variables depends on the other, say, for example you have a path in $(x,y)$ space you might write it as $(x,y(x))$ so changing $x$ will change the function in two ways, once because $x$ itself changes and a second time because changing $x$ changes $y$. 
+Basically the $y$ does nothing while the derivative in $x$ is being
+calculated. You will notice that the notation has changed slightly,
+with $\partial f/\partial x$ having the curly $d$, pronounced ``del''
+or ``partial'' and we call this the \textbf{partial derivative}.
+
+This is an old notation intended to distinguish what we are looking at
+here, partial derivatives, from the so called total derivative. This
+happens when one of the variables depends on the other, say, for
+example you have a path in $(x,y)$ space you might write it as
+$(x,y(x))$ so changing $x$ will change the function in two ways, one
+way is because $x$ itself changes and a second because changing $x$
+changes $y$; in this case the derivative is called the \textbf{total
+  derivative}; in fact finding the total derivative is not that common
+and we won't consider it here, but the notational difference between
+differentiating in one dimension and in many is annoying since it is
+essentially the same calculation and because there are times when you
+have a function with variables and parameters and you don't know which
+notation to use. Anyway, try not to worry about the notation, as is
+typical in mathematics it is powerful and useful but not as clear cut
+as you'd expect and at times annoying.
+
+Anyway, obviously we can also define the partial derivative with respect to $y$:
+\begin{equation}
+  \frac{\partial f}{\partial y}=\lim_{h\rightarrow 0}\frac{f(x,y+h)-f(x)}{h}
+\end{equation}
+It is sometimes useful to write a shorthand
+\begin{equation}
+  f_x=\frac{\partial f}{\partial x}
+\end{equation}
+and
+\begin{equation}
+  f_y=\frac{\partial f}{\partial y}
+\end{equation}
+As with the dots and primes in one-dimensional, the proper
+fraction-like notation is clearly better since it expresses in
+notation some of the properties of the derivative. However, the other
+notation is also commonly used because we are lazy.
+
+Here is an example:
+\begin{equation}
+  f(x,y)=\sin{x}\cos{y}
+\end{equation}
+and $f_x=\cos{x}\cos{y}$ whereas $f_y=-\sin{x}\sin{y}$.
+
+
+
 
 
 \section*{Summary}
