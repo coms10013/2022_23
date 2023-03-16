@@ -70,23 +70,6 @@ These worksheets are partly, well mostly, taken from worksheets prepared by Chlo
   and then to work out what $\lambda$ is from the differential
   equation by substituting in, $A$ is typically determined by the
   initial conditions, so if you are told $y(0)$ you substitute $t=0$ in the right hand side so $A=y(0)$.
-\item \textbf{The particular and general solutions} If the equation is inhomogenous, the ansatz will often work then as well, but will give a value for $A$, this is called the \textbf{particular solution}; to get the general solution you will need to also solve the corresponding homogenous equation, the one you get by dropping the inhomogenous part, if you add this solution to the particular solution you still get a solution to the inhomogenous equation, the \textbf{general solution}. Here is an example
-  \begin{equation}
-    \dot{y}=-y+\exp{3t}
-  \end{equation}
-  Substitute $y=A\exp{\lambda t}$ to get
-  \begin{equation}
-    \lambda Ae^{\lambda t}=-Ae^{\lambda t}+e^{3t}
-  \end{equation}
-  so the ansatz solves the equation if $\lambda=3$ and $A=1/4$. Now solve
-  \begin{equation}
-    \dot{y}=-y
-  \end{equation}
-  The ansatz says $y=A\exp{-t}$ solves this and so
-  \begin{equation}
-    y=Ae^{-t}+\frac{1}{4}e^{3t}
-  \end{equation}
-  is the general solution to the original equation; you can check this. $A$ is usually fixed by the inital condition so if $y(0)=1$ for example then $A=3/4$.
   
 \item \textbf{Integrating factor} Another approach to the same class of equations, the integrating factor has the advantage that it also works for equations with non-constant coefficients, here though we consider the constant coefficient case. If
   \begin{equation}
@@ -100,7 +83,17 @@ These worksheets are partly, well mostly, taken from worksheets prepared by Chlo
   
 \end{itemize}
 
-
+\subsection*{Some indefinite integrals}
+\begin{itemize}
+\item $\int t^ndt =t^{n+1}/(n+1)+C$.
+\item $\int \exp{rt}dt = \exp{rt}/r +C$ where $r$ is constant.
+\item $\int 1/t{} dt = \log{t}+C$
+\item \textbf{substitution}: if $u=u(t)$ then you can change variables inside the integral provided you also let
+  \begin{equation}
+    dt=\frac{1}{du/dt}du
+  \end{equation}
+\end{itemize}
+  
 \subsection*{Questions}
 
 These are the questions you should make sure you work on in the workshop.
@@ -257,3 +250,22 @@ This equation is non-linear so it can't be solved by the methods used for linear
 
 
 \end{document}
+
+
+\item \textbf{The particular and general solutions} If the equation is inhomogenous, the ansatz will often work then as well, but will give a value for $A$, this is called the \textbf{particular solution}; to get the general solution you will need to also solve the corresponding homogenous equation, the one you get by dropping the inhomogenous part, if you add this solution to the particular solution you still get a solution to the inhomogenous equation, the \textbf{general solution}. Here is an example
+  \begin{equation}
+    \dot{y}=-y+\exp{3t}
+  \end{equation}
+  Substitute $y=A\exp{\lambda t}$ to get
+  \begin{equation}
+    \lambda Ae^{\lambda t}=-Ae^{\lambda t}+e^{3t}
+  \end{equation}
+  so the ansatz solves the equation if $\lambda=3$ and $A=1/4$. Now solve
+  \begin{equation}
+    \dot{y}=-y
+  \end{equation}
+  The ansatz says $y=A\exp{-t}$ solves this and so
+  \begin{equation}
+    y=Ae^{-t}+\frac{1}{4}e^{3t}
+  \end{equation}
+  is the general solution to the original equation; you can check this. $A$ is usually fixed by the inital condition so if $y(0)=1$ for example then $A=3/4$.
