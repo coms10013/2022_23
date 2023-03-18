@@ -69,7 +69,75 @@ Here is an example:
 \begin{equation}
   f(x,y)=\sin{x}\cos{y}
 \end{equation}
-and $f_x=\cos{x}\cos{y}$ whereas $f_y=-\sin{x}\sin{y}$.
+and $f_x=\cos{x}\cos{y}$ whereas $f_y=-\sin{x}\sin{y}$. Here is another example 
+\begin{equation}
+  f(x,y)=e^{x^2y}
+\end{equation}
+then $f_x=2xy\exp{(x^2y}$ and $f_y=x^2\exp{(x^2y)}$.
+
+\section*{Nabla}
+
+Obviously, $\partial f/\partial x$ gives the rate of change in the $x$
+direction and $\partial f/\partial y$ the rate of change in the $y$
+direction. It will often be useful to put these together as a vector, this is called the gradient:
+\begin{equation}
+  \nabla f=\left(\frac{\partial f}{\partial x},\frac{\partial f}{\partial y}\right)
+\end{equation}
+The symbol $\nabla$ is often just called ``the gradient operator'', it
+is also called ``nabla'' the name given to it by the mathematician
+Peter Tait; sometimes it is called ``del''. The symbol, and the
+concept of the gradient was introduced by the nineteenth century Irish
+mathematician William Rowan Hamilton, how also invented the
+four-dimensional generalization of complex numbers called
+quoternions. He used the nabla symbol because it is just the Greek
+letter capital delta, $\Delta$, upside down and was therefore easy for
+typesetters; the name nabla is from the Greek word for harp. Anyway,
+whatever its name, here is an example, if $f(x,y)=2x^3y^2+y^2$ then
+\begin{equation}
+  \nabla f=(6x^2y^2,4x^3y+2y)
+\end{equation}
+
+Often we are interested in how a function $f(x,y)$ changes in some
+direction that isn't specifically the $x$ or $y$ directions, for this
+there is the concept of the \textbf{derivative along a vector}:
+\begin{equation}
+  \nabla_{\mathbf{w}}f(x,y)=\lim_{h\rightarrow 0}\frac{f(x+hw_1,y+hw_2)-f(x,y)}{h}
+\end{equation}
+where $\mathbf{w}=(w_1,w_2)$; often a unit vector is used and then we
+would refer to the \textsl{derivative in the direction of}
+$\textbf{w}$. Without proving any theorem, you can hopefully see
+intuitively that the rate $f$ changes along $\textbf{w}$ is the rate
+$f$ is changing in the $x$ direction by the amount of $\textbf{w}$ in
+the $x$ direction plus the rate $f$ is changing in the $y$ direction
+by the amount of $\textbf{w}$ in the $y$ direction. In short, it can
+be proved that:
+\begin{equation}
+  \nabla_{\mathbf{w}}f(x,y)=w_1\frac{\partial f}{\partial x}+w_2\frac{\partial f}{\partial y}
+\end{equation}
+or, written using the dot product
+\begin{equation}
+  \nabla_{\mathbf{w}}f(x,y)=\nabla f\cdot \textbf{w}
+\end{equation}
+
+This leads to a nice interpretation of the gradient. For two vectors
+$\textbf{u}$ and $\textbf{v}$ the dot product is given by
+\begin{equation}
+  \textbf{u}\cdot\textbf{v}=|\textbf{u}||\textbf{v}|\cos{\theta}
+\end{equation}
+where $\theta$ is the angle between $\textbf{u}$ and
+$\textbf{v}$. Thus, for given lengths, the maximum dot product is when
+the two vectors point in the same direction. Now since
+\begin{equation}
+  \nabla_{\mathbf{w}}f(x,y)=\nabla f\cdot \textbf{w}
+\end{equation}
+this means the direction along which $f$ changes most is the direction
+of $\nabla f$, in other words, the gradient points in the direction of
+highest rate of change. If we are thinking of $f(x,y)$ as giving the
+height of some landscape over coordinates $x$ and $y$, this means
+$\nabla f$ ``points straight up the hill''.
+
+
+
 
 
 
@@ -77,9 +145,25 @@ and $f_x=\cos{x}\cos{y}$ whereas $f_y=-\sin{x}\sin{y}$.
 
 \section*{Summary}
 
-This set of notes revises basic calculus using the old-fashioned
-notion of infinitessimals. We gave a list of standard derivatives and
-looked at the chain rule. 
+The partial derivatives are the derivative with respect to one
+variable, to find the partial derivative you just treat the other
+variable as a constant. The gradient, denoted with a nable, is the
+vector of partial derivatives:
+\begin{equation}
+  \nabla f=(f_x,f_y)
+\end{equation}
+using the notation
+\begin{equation}
+  f_x=\frac{\partial f}{\partial x}
+\end{equation}
+for example. The derivative along a vector $\mathbf{w}$ is
+\begin{equation}
+  \nabla_{\mathbf{w}}f=\mathbf{w}\cdot \nabla f
+\end{equation}
+The gradient points in the direction of greatest rate of change.
+
+
+
 
 \end{document}
 

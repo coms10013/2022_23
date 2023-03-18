@@ -1,0 +1,138 @@
+\documentclass[12pt]{article}
+\usepackage{amsfonts, epsfig}
+\usepackage[authoryear]{natbib}
+\usepackage{graphicx}
+\usepackage{fancyhdr}
+\usepackage{amsmath}
+\pagestyle{fancy}
+\lfoot{\texttt{coms10013.github.io}}
+\lhead{Analysis - 2 Extrema in more than one dimesion - Conor}
+\rhead{\thepage}
+\cfoot{}
+\begin{document}
+
+\section*{Extrema}
+
+Just as in one dimension we define a critical point as $df/dx=0$ and
+all extrema are critical points; in higher dimensions a critical point
+is one where all the partial derivatives are zero. We saw that
+\begin{equation}
+  \nabla_{\mathbf{w}}f=\mathbf{w}\cdot\nabla{}f
+\end{equation}
+and so, given that the rate of change at an extremum must be zero in
+all directions, all extrema are critical points in higher dimensions
+too.
+
+Distinguishing between maxima and minima is a small bit more
+complicated in higher dimesions; it relies on the \textsl{Hessian},
+the matrix of second-order partial derivatives. Here we will look at
+two dimensions as an example, though the idea is similar for other
+numbers of dimensions. In two dimensions the Hessian is
+\begin{equation}
+  H=\left(\begin{array}{cc}\frac{\partial^2f}{\partial x^2}&\frac{\partial^2f}{\partial x\partial y}\\
+    \frac{\partial^2f}{\partial y\partial x}&\frac{\partial^2f}{\partial y^2}\end{array}\right)
+\end{equation}
+or, using the obvious notation
+\begin{equation}
+  H=\left(\begin{array}{cc}f_{xx}&f_{xy}\\f_{yx}&f_{yy}\end{array}\right)
+\end{equation}
+Also, note that for all but very weird functions $f_{xy}=f_{yx}$.
+
+Now imagine the Hessian at a critical point looks like
+\begin{equation}
+  H=\left(\begin{array}{cc}-1&0\\0&-1\end{array}\right)
+\end{equation}
+then it would seem that we have a maximum since the $x$ and $y$
+derivatives are falling at this point, just like the one-dimensional
+case. More generally though there are non-zero $f_{xy}$ so what is
+important is not the diagonal elements but the eigenvalues. If both
+eigenvalues of the Hessian are negative at a critical point, then it's
+a maximum, if both are positive it is a minimum. There is another
+case, where one is positive and one is negative, that implies the
+critical point is a minumum in one direction and a maximum in another;
+that can happen in two dimensions and corresponds to a
+\textsl{saddlepoint}, like the point where two hills join and so the
+land goes up in one set of directions but down in another. Of course,
+there is always the possibility of a zero eigenvalue, this is like the
+one-dimensional case where the second derivative is zero, we could
+still have an extremum, but a very flat one, or it might not be an
+extremum at all.
+
+This all seems to imply you need the eigenvalues of the Hessian to
+classify two-dimensional critical points and certainly if you have the
+eigenvalues and you can do the classification, however, you actually
+only need the signs of the two eigenvalues and you can usually work
+that out without actually knowing the eigenvalues. If $\lambda_1$ and
+$\lambda_2$ are the eigenvalues of a matrix $H$ then
+\begin{equation}
+  \det{H}=\lambda_1\lambda_2
+\end{equation}
+and
+\begin{equation}
+  \rm{tr}{H}=\lambda_1+\lambda_2
+\end{equation}
+There are known as matrix invariants. It means that if the determinant
+is negative you have a saddlepoint, if it is positive then the two
+eigenvalues have the same sign, so if the trace is negative you have a
+maximum, if it is negative, a minimum. If the determinant is zero then
+there is a zero eigenvalue and the Hessian alone isn't enough to tell
+you what is happening.
+
+Lets do an example:
+\begin{equation}
+  f(x,y)=x^3+x^2y-y^2-4y
+\end{equation}
+Now $f_x=3x^2+2xy$ and $f_y=x^2-2y-4$. These equations are often a
+pain, it is hard to come up with good examples were the equations for
+the critical points are easy to solve. In this example, the first equation looks promising:
+\begin{equation}
+  3x^2+2xy=0\implies{}x(3x+2y)=0
+\end{equation}
+so the solutions are $x=0$ or $x=-2y/3$. If $x=0$ then the second
+equation gives $y=-2$; if $x=-2y/3$ the second equation is
+\begin{equation}
+  4y^2/9-2y-4=0\implies{}2y^2-9y-18=0
+\end{equation}
+and this factorizes into $(2y+3)(y-6)=0$ so the solutions are $y=-3/2$
+and $y=6$. Hence the three critical points are $(0,-2)$, $(-4,6)$ and $(1,-3/2)$. Now lets work out the Hessian:
+\begin{equation}
+  H=\left(\begin{array}{cc}6x+2y&2x\\2x&-2\end{array}\right)
+\end{equation}
+so for the point $(0,-2)$
+\begin{equation}
+  H=\left(\begin{array}{cc}-4&0\\0&-2\end{array}\right)
+\end{equation}
+and since this is diagonal matrix we can read off the eigenvalues,
+they are $-4$ and $-2$ and so this is a maximum. For $(-4,6)$ the Hessian is
+\begin{equation}
+  H=\left(\begin{array}{cc}-12&-8\\-8&-2\end{array}\right)
+\end{equation}
+and hence the determinant of the Hessian is $-40$ which is negative and there is a saddle point. For $(1,-3/2)$ the Hessian is
+\begin{equation}
+  H=\left(\begin{array}{cc}3&2\\2&-2\end{array}\right)
+\end{equation}
+so the determinant is -10 and this is another saddle point.
+
+For higher dimensions the story is much the same, but now there are
+more types of saddle point, for example in three dimensions there are
+saddle points with two up directions and one down and saddle points
+with one up direction and two down. These will correspond to two
+negative and one positive eigenvalues, or one negative and two
+positive eigenvalues for the Hessian.
+
+\section*{Summary}
+
+In higher dimensions there is a critical point when the gradient is zero. To classify the critical point the Hessian is calculated, in two-dimension this is
+  \begin{equation}
+  H=\left(\begin{array}{cc}f_{xx}&f_{xy}\\f_{yx}&f_{yy}\end{array}\right)
+\end{equation}
+If this has two positive eigenvalues at a critical point then it is a
+minimum, two negative, a maximum, one of each, a saddle point. If one,
+or both, of the eigenvalues is zero then it could be any of the three,
+or it might not be an extremum at all. The sign of the eigenvalues can
+be figured out from the determinant and trace since the determinant is
+the product of the eigenvalues and the trace is the sum.
+
+  
+\end{document}
+
