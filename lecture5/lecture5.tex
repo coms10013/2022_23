@@ -1,0 +1,417 @@
+\documentclass[12pt]{article}
+\usepackage{amsfonts, epsfig}
+\usepackage[authoryear]{natbib}
+\usepackage{graphicx}
+\usepackage{fancyhdr}
+\usepackage{amsmath}
+\pagestyle{fancy}
+\lfoot{\texttt{coms10013.github.io}}
+\lhead{Analysis - 4 differential equations - Conor}
+\rhead{\thepage}
+\cfoot{}
+\begin{document}
+
+\section*{Differential equations}
+A differential equation is an equation for an unknown function, or
+functions, where the equation involves derivatives of the function as
+well as the function itself. Differential equations are everywhere,
+obviously in physics, in dynamics Newtons law, $F=ma$ is a
+differential equation since $a$, the acceleration, is the second
+derivative of position; in quantum mechanics, Schr\"{o}dinger's
+equation, or even more complicated equations like the Dirac equation,
+are differential equations. In biology, the Hodgkin-Huxley equation
+links the rate of change of the voltage inside a neuron to its inputs,
+in finance, the Black-Scholes equation links the rate of change value
+of an option to the value of the underlying commodity, climate
+modelling is just a giant set of differential equations.
+
+We can solve some equations exactly, others we can't solve, in fact,
+most non-linear equations cannot be solved exactly, but we can often
+solve them approximately using computers and knowing about the
+solutions to linear equations can give us a good understanding of how
+differential equations work.
+
+Before we discuss terminology and methods, we'll look at a couple of examples, here is a very simple example, say
+\begin{equation}
+  \frac{df}{dt}=t^2+2
+\end{equation}
+and we know the initial value of $f(t)$, it is $f(0)=5$. We can solve this by \textbf{direct integration}, we write
+\begin{equation}
+  df=(t^2+2)dt
+\end{equation}
+and integrate both sides
+\begin{equation}
+  \int df = \int (t^2+2)dt
+\end{equation}
+or
+\begin{equation}
+  f=\frac{1}{3}t^3+2t+C
+\end{equation}
+where $C$ is the arbitrary constant of integration. Now substitute in $t=0$ to get
+\begin{equation}
+  5=C
+\end{equation}
+and the solution is
+\begin{equation}
+  f=\frac{1}{3}t^3+2t+5
+\end{equation}
+Now you could object that there is nothing in the proofs and
+definitions we looked at to say you can treat the $df/dt$ like a
+fraction and multiply across by $dt$, in fact, you most explicitly
+cannot treat $df/dt$ as a fraction in most circumstances, but there
+are theorems that say that it works in cases like the one we just
+looked at where we are going to integrate. In other words, don't think
+the fact $df/dt$ looks like a fraction allows you to treat it like a
+fraction in all circumstances, but, in fact, there are theorems we
+won't look at that says that you can in this situation. This theorem
+is called \textbf{the fundamental theorem of calculus} and it
+basically says that the inverse of differentiation, the
+anti-derivative, is the indefinite integral. There is a short table of
+integrals at the end of these notes in case you need reminding.
+
+Here is another simple example:
+\begin{equation}
+  \frac{df}{dt}=2f
+\end{equation}
+This means
+\begin{equation}
+  \int\frac{df}{f}=2\int{}dt
+\end{equation}
+and using $\int dx/x=\log{x}+C$ this gives
+\begin{equation}
+  \log{f}=2t+C
+\end{equation}
+or
+\begin{equation}
+  f=e^{2t+C}
+\end{equation}
+or
+\begin{equation}
+  f=Ae^{2t}
+\end{equation}
+Here we have taken the $\exp{C}$ and, since $C$ is an arbitrary
+constant, we can just rewrite it as another arbitrary constant
+$A=\exp{C}$. It might appear that this is cheating since $\exp{C}$ is
+always positive, but with complex numbers that isn't always the case
+and, in fact, there is a bit of messing going on with the sign when
+you do the integration, so it actually all works out. You can check the putative solution is the solution by differentiating:
+\begin{equation}
+  \frac{d}{dt}Ae^{2t}=2Ae^{2t}=2f
+\end{equation}
+
+\section*{Types of differential equation}
+We are going to look at differential equations with just one unknown function and one variable; this is an \textbf{ordinary} differential equation, for example
+\begin{equation}
+  \frac{d\theta}{dt}=w+\sin{\theta-t}
+\end{equation}
+for constant $w$ is an ordinary differential equation, albeit a hard one, whereas
+\begin{equation}
+  \frac{\partial \phi}{\partial t}+\frac{\partial^3\phi}{\partial x^3}-6\phi\frac{\partial \phi}{\partial x}=0
+\end{equation}
+for a function $\phi(x,t)$ that depends on $x$ and $t$ is a
+\textbf{partial} differential equation and not an ordinary
+differential equation. We won't be looking at partial differential
+equations here. If you are curious, this very difficult partial
+differential equation is called the Kortweig de Vries equation and it
+describes waves in a shallow channel; it was written down to describe
+a odd wave the engineer John Scott Russell spotted in a canal near
+Edinburgh.
+
+An ordinary differential equation is \textbf{linear} if, roughly
+speaking, if $f$ is the unknown variables all the $f$ terms only have
+$f$ and not powers of $f$ or functions of $f$. Thus
+\begin{equation}
+  \frac{df}{dt}=tf+t^2
+\end{equation}
+is a linear equation but
+\begin{equation}
+  \frac{df}{dt}=f^2
+\end{equation}
+is not, nor is
+\begin{equation}
+  \frac{df}{dt}=\sin{f}
+\end{equation}
+nor is
+\begin{equation}
+  f\frac{df}{dt}=t
+\end{equation}
+Generally speaking, we are very good at solving linear equations but often struggle with nonlinear ones. Some nonlinear equations are linear equations in disguise, for example
+\begin{equation}
+  f\frac{df}{dt}=f^2
+\end{equation}
+is actually the linear equation
+\begin{equation}
+  \frac{1}{2}\frac{dg}{dt}=g
+\end{equation}
+where $g=f^2$, but genuinely nonlinear equations can be hard, we will look at a few, fairly easy nonlinear equations in the worksheet.
+
+An linear ordinary differential equation can be \textbf{homogenous} or
+\textbf{inhomogeneous}; if $f$ is the unknown function and $t$ the
+variable then homogeneous equation is one where all the terms have an
+$f$ or a derivative of $f$ in, so
+\begin{equation}
+  \frac{d^2f}{dt^2}+2\frac{df}{dt}+f=\sin{t}
+\end{equation}
+is inhomogeneous, whereas 
+\begin{equation}
+  \frac{d^2f}{dt^2}+2\frac{df}{dt}+f=0
+\end{equation}
+is homogeneous. The order of a ordinary differential equation is the order of the highest derivative, so the example above is second order because of the $d^2f/dx^2$ term whereas
+\begin{equation}
+  \frac{df}{dt}=\sin{f}
+\end{equation}
+is first order. Finally, the easiest examples have constant coefficients like
+\begin{equation}
+  \frac{d^2f}{dt^2}+2\frac{df}{dt}+f=0
+\end{equation}
+whereas more difficult, but for linear cases, often still solvable examples have coefficients that depend on the variable, like
+\begin{equation}
+  \frac{d^2f}{dt^2}+2t\frac{df}{dt}+f=0
+\end{equation}
+
+\section*{Solving first order linear ordinary differential equations}
+
+Here we'll look at solving first order linear ordinary differential
+equations with constant coefficients, the collection of methods we
+look at will include the method called integrating factors, which
+often also works for equations with variable coefficients, but we
+won't look at that here, integrating factors are for the next
+lecture. In this section we will look at homogenous equations,
+inhomogeneous equations will be looked at in the next lecture.
+
+The first method is direct integration, here is another example:
+\begin{equation}
+  \frac{df}{dt}=\frac{1}{t}
+\end{equation}
+with $f(2)=3$ then
+\begin{equation}
+  \int df = \int \frac{dt}{t}
+\end{equation}
+so
+\begin{equation}
+  f=\log{t}+C
+\end{equation}
+where $C$ is a constant of integration. A differential equation tells
+you how a function is changing in terms of its current value; this
+means that to know the solution completely, without an arbitrary
+constant, you usually need to know the function at at least one place:
+if I tell you the speed something is moving at, you can work out how
+far it will move but you can't work out where it will be unless I also
+tell you where it started. Often this extra information is an initial
+condition, $f(0)$ but in this problem we have been given the value at
+$t=2$:
+\begin{equation}
+  3=f(2)=\log{2}+C
+\end{equation}
+so $C=3-\log{2}$ and the solution is
+\begin{equation}
+  f=\log{\frac{t}{2}}+3
+\end{equation}
+where we have used the law of logs that says $\log{a}-\log{b}=\log{a/b}$.
+
+A second method of solving differential equation is the
+\textbf{ansatz}. The word ansatz is German for guess and the idea here is that you just guess the solution, a good guess often looks like
+\begin{equation}
+  f(t)=Ae^{rt}
+\end{equation}
+with constants $r$ and $A$ and then see if that works out, so basically you are guessing the solution has a particular form, in this case an exponential and you substitute in and check if it works out, if the solution doesn't have that form it won't work, if it does, you've solved the equation. The easiest example would be equations that look like
+\begin{equation}
+  \frac{df}{dt}=4f
+\end{equation}
+Substitute in the ansatz and you get
+\begin{equation}
+  Are^{rt}=4Ae^{rt}
+\end{equation}
+Cancel the $A$ and the $\exp{rt}$ and you get
+\begin{equation}
+  r=4
+\end{equation}
+and so the ansatz works provided $r=4$ and so the solution is
+\begin{equation}
+  f=Ae{4t}
+\end{equation}
+If you had used a bad guess, say $f=At^r$ for constant $r$ it just won't work:
+\begin{equation}
+  Art^{r-1}=4At^r
+\end{equation}
+and then dividing across by $At^{r-1}$ we get
+\begin{equation}
+  r=4t
+\end{equation}
+which isn't a constant.
+
+\section*{Solutions as vector spaces}
+
+In your linear algebra lectures you have learned about vector spaces, a set of objects is a vector space is it has an appropriate linear structure, so if
+\begin{equation}
+  V=\{v_1,v_2,\ldots,v_n\}
+\end{equation}
+is a set it is a vector space if for any $v_i$ and $v_j$ in the set
+\begin{equation}
+  v=v_i+v_j
+\end{equation}
+is also in the set and, if $v$ is in the set, so is $cv$ where $c$ is
+a number and finally, the set contains a ``zero vector'', say $e$ so
+that if $v$ is in the set $v+e$ is also in the set. We haven't set
+what type of number $c$ is and you can have vector spaces over the
+real numbers where $c$ has to be a real number or, for example, vector
+spaces over the complex numbers, where $c$ can be complex.
+
+Vector spaces are very useful, in part because it is a very common
+structure where things that work on simple examples work on much
+harder ones, always useful in mathematics. In the case of vector
+spaces, we have simple examples like three-dimensional vectors where
+we can imagine the vectors by imagining vectors in space, but there
+are also complicated infinite-dimensional vector spaces where we can
+use the intuition we build up in three dimensions to prove theorems.
+
+An example of an infinite dimensional vector space is the space of
+functions, if $f(x)$ is a function and $g(x)$ is a function and $c_1$
+and $c_2$ are real numbers then
+\begin{equation}
+  h(x)=c_1f(x)+c_2g(x)
+\end{equation}
+is also a function. The map $e(x)=0$ is a zero function. Now one thing
+we do in the case of finite-dimensional vector spaces is find basis
+vectors, $\textbf{i}$, $\textbf{j}$ and $\textbf{k}$ for example; the
+idea of basis vectors for the space of functions is a powerful one, at
+the heart, for example, of Fourier analysis; we won't really discuss
+that here, but bear it in mind when you see Fourier analysis in later
+years.
+
+
+Another important idea for finite dimensional vector spaces is
+matrix operations, linear transformations of space are written as
+matrices. Now differentiation and integration are also linear:
+\begin{equation}
+  \frac{d}{dx}[c_1f(x)+c_2g(x)]=c_1\frac{df}{dx}+c_2\frac{dg}{dx}
+\end{equation}
+and
+\begin{equation}
+  \int[c_1f(x)+c_2g(x)]dx=c_1\int f dx+c_2\int g dx
+\end{equation}
+and so, in a way, differentiation and integration can be thought of as
+infinite-dimensional matrices. In fact the function $\exp{x}$ has the
+property that
+\begin{equation}
+  \frac{de^x}{dx}=e^x
+\end{equation}
+and
+\begin{equation}
+  \int e^x dx = e^x+C
+\end{equation}
+so, with a little messing about the integration constant, we can think
+of the exponential as an eigenfunction of these operators. Again,
+these ideas go beyond this unit, but hopefully you can see that there
+is an important and powerful approach to differential equations which
+thinks about the vector space of functions.
+
+We have seen another interesting point though, often if we have a
+solution to a differential equation, well a homogeneous first order
+linear differential equation, then if we have a solution we can
+multiply it by a constant and still have a solution; the constant is
+fixed by the initial condition, not the differential equation. In fact
+this is part of a larger theorem, which we state here without proving: the solutions to a homogeneous linear differential equation of order $n$ form an $n$-
+dimensional vector space which is a subspace of the function vector space. In other words, the
+general solution to such an equation is a function
+\begin{equation}
+  f(t)=A_1f_1(t)+A_2f_2(t)+\ldots+A_nf_n(t)
+\end{equation}
+ with $n$ different linearly
+independent basis functions $f_i(t)$ and $n$ integration constants $A_i$.
+
+
+
+
+
+\section*{Recalling integration}
+
+There are two important ideas related to integration, the first is
+\textbf{the area under a curve}, the area between $f(x)$ and the
+$x$-axis from $a$ to $b$ is
+\begin{equation}
+  A=\int_a^bf(x)dx
+\end{equation}
+There is a whole ``infinitessimals'' discussion of how this can be calculated, basically you think about adding little bits
+\begin{equation}
+  A(\delta)=\sum_{n=0}^Nf(a+n\delta)\delta
+\end{equation}
+where $N$ is chosen so that $a+N\delta=b$; the area under the curve, and hence the integral, is th limit of $A(\delta)$ as $\delta\rightarrow 0$. It turns out there are lots of technical details to deal with to make this work, but, in any case it isn't the thing we are interested in here, we are interested in the \textbf{antiderivative}, for a function $f(x)$ we want to find $F(x)$ such that
+\begin{equation}
+  \frac{d}{dx}F(x)=f(x)
+\end{equation}
+It turns out, due to something called the \textbf{fundamental theorem of calculus} that this is the same calculation, more or less, and that the antiderivative is the indefinate integral
+\begin{equation}
+  F(x)=\int f(x)dx
+\end{equation}
+
+Thus integration is the opposite of differentiation, so, for example
+\begin{equation}
+  \frac{dt^n}{dt}=nt^{n-1}
+\end{equation}
+so
+\begin{equation}
+  \int t^{n-1}dt=\frac{1}{n}t^n+C
+\end{equation}
+$C$ is the integration constant, an arbitrary number. The idea is that
+\begin{equation}
+  \frac{d}{dt}t^n=nt^{n-1}
+\end{equation}
+but so is
+\begin{equation}
+  \frac{d}{dt}\left(t^n+C\right)=nt^{n-1}
+\end{equation}
+for any constant $C$ so if you think of the indefinite integral as
+being the backwards of differentiation what you get isn't fully defined because you can add an arbitrary constant without changing anything.
+
+This leads us to a list of indefinite integrals
+\begin{itemize}
+\item $\int t^ndt =t^{n+1}/(n+1)+C$.
+\item $\int \exp{rt}dt = \exp{rt}/r +C$ where $r$ is constant.
+\item $\int 1/t{} dt = \log{t}+C$
+\item $\int \sin{t} dt = -\cos{t}$
+\item $\int \cos{t} dt = \sin{t}$
+\end{itemize}
+
+In addition you can do a \textbf{substitution}, for example if you wanted
+\begin{equation}
+  \int xe^{x^2}dx
+\end{equation}
+you might want to do a change of variables to $u=x^2$ since you know
+how to integrate $\exp{u}$ when you dn't know how to integrate
+$\exp{x^2}$. However, you also need to change the $dx$, there is a
+rule for this
+\begin{equation}
+      dx=\frac{1}{du/dx}du
+\end{equation}
+This $du/dx$ is called the Jacobian factor and there are some
+difficult points about its sign we are ignoring here. In the example
+this would tell you that
+\begin{equation}
+  dx=\frac{du}{2x}
+\end{equation}
+or $du=2xdx$ so
+\begin{equation}
+  \int xe^{x^2}dx=\frac{1}{2}\int e^udu=\frac{1}{2}e^u+C=\frac{1}{2}e^{x^2}+C
+\end{equation}
+Now you'll see this only worked because there was an $x$ knocking
+around to allow us to change the variable and this suggests some
+things are hard, even impossible, to integrate. We haven't looked at
+all the tricks, indeed we haven't looked at \textbf{integrating by
+  parts}, one of the most important tricks, but it is indeed
+nonetheless true that some integrals are hard and many are impossible.
+
+\section*{Summary}
+
+Differential equations are important, they are equations which include
+derivatives of the unknown function; a useful and common class of
+differential equations are the first order linear homogeneous ordinary
+differential equations. We can solve these using direct integration or
+using an ansatz: this leaves an arbitrary constant which is often
+fixed by an initial condition. Integration, in turn, is often hard,
+but we can do it for some functions, this might involve a change of
+variable, if you do change variables watch out for the Jacobian
+factor.
+  
+\end{document}
+

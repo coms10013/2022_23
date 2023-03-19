@@ -1,0 +1,178 @@
+\documentclass[12pt]{article}
+\usepackage{amsfonts, epsfig}
+\usepackage[authoryear]{natbib}
+\usepackage{graphicx}
+\usepackage{fancyhdr}
+\usepackage{amsmath}
+\pagestyle{fancy}
+\lfoot{\texttt{coms10013.github.io}}
+\lhead{Analysis - 5.2 differential equations - Conor}
+\rhead{\thepage}
+\cfoot{}
+\begin{document}
+
+\section*{Second order equations}
+
+Here we will consider second-order homogenous differential equations;
+there is a rich literature on second-order differential equations of
+all sorts, they are the bread-and-butter of physical systems but there
+is already a lot of interesting ideas if you consider only the
+simplest second-order homogenous example. First, lets solve a second order differential equation:
+\begin{equation}
+  \ddot{y}-y=0
+\end{equation}
+and, since we don't have a method, lets try an ansatz, guessing $y=A\exp{rt}$:
+\begin{equation}
+  Ar^2\exp{rt}-A\exp{rt}=0
+\end{equation}
+Cancel what can be cancelled and you get
+\begin{equation}
+  r^2=1
+\end{equation}
+or $r=\pm 1$ so the solutions are
+\begin{equation}
+  y=A_1e^t+A_2e^{-t}
+\end{equation}
+It is easy to check this works:
+\begin{equation}
+  \ddot{y}=A_1e^{t}+A_2e^{-t}=y
+\end{equation}
+The first thing to notice is how easy this was; here's another example
+\begin{equation}
+  \ddot{y}+\dot{y}-6y=0
+\end{equation}
+Substitute for $y=A\exp{rt}$ and
+\begin{equation}
+  r^2+r-6=0
+\end{equation}
+which factorizes to $(r+3)(r-2)=0$ and the solution is
+\begin{equation}
+  y=A_1e^{-3t}+A_2e^{2t}
+\end{equation}
+Of course, it won't always be that easy, these two examples have
+equations for $r$ that are easy to factorize into real numbers, we
+will look at a more complicated example soon. There are other even
+more complicated examples where the equation for $r$ has a repeated
+root, these will still have two solutions even if there is only one
+value of $r$, this involves a different ansatz; it isn't difficult but
+for reasons of time we won't look at those cases here.
+
+Before we look at the more complicated examples, the other obvious
+thing is that we have a two-dimensional space of solutions, with two
+arbitrary constants, $A_1$ and $A_2$. This makes sense, imagine
+throwing a ball into the air, to map the position of the ball through
+time you would need not only to know where you threw it from, but how
+fast. In the same way that the arbitrary constant for first-order
+differential equations is often fixed by an initial conditions, for
+second order the two conditions are often fixed by an intial condition
+for $y(0)$ and $\dot{y}(0)$
+
+As an example, say
+\begin{equation}
+  \ddot{y}+3\dot{y}+2y=0
+\end{equation}
+with $y(0)=0$ and $\dot{y}(0)=1$ then
+\begin{equation}
+  y=A_1e^{-t}+A_2e^{-2t}
+\end{equation}
+and $y(0)=A_1+A_2=0$ and $\dot{y}(0)=-A_1-2A_2=1$, substituting
+$A_1=-A_2$ from the $y(0)$ equation gives $1=-A_2$ and so
+\begin{equation}
+  y=e^{-t}-e^{-2t}
+\end{equation}
+For spatical problems, the two conditions are often boundary
+conditions, values for $y$ for two different values of its arguement,
+we will do an example like that shortly.
+
+Now lets examine
+\begin{equation}
+  \ddot{y}+y=0
+\end{equation}
+This looks like the first one we did, but there is a change of sign, the usual ansatz gives
+\begin{equation}
+  r^2=-1
+\end{equation}
+or $r=\pm i$ and hence
+\begin{equation}
+  y=A_1e^{it}+A_2e^{-it}
+\end{equation}
+This is an inconvenient way to write it, so we can expand the exponentials
+\begin{equation}
+  y=A_1(\cos{t}+i\sin{t})+A_2(\cos{t}-i\sin{t})
+\end{equation}
+or renaming the arbitrary constant so $C_1=A_1+A_2$ and $C_2=iA_1-iA_2$ this gives
+\begin{equation}
+  y=C_1\cos{t}+C_2\sin{t}
+\end{equation}
+which is a function that oscillates up and down with period $2\pi$. It
+might look like we cheated a bit to hide the $i$s, in fact, of course,
+the $C_1$ and $C_2$ might be complex, but if initial or boundary
+conditions are real they will be real, a real solution to a real
+equation will stay real! Lets looks that this as a spatial problem, say
+\begin{equation}
+  \frac{d^2y}{dx^2}+4y=0
+\end{equation}
+for $y(x)$, a function of $x$ and with boundard conditions $y(0)=0$ and $y(\pi/4)=1$, then we get, but the usual process
+\begin{equation}
+  y=C_1\cos{2x}+C_2\sin{2x}
+\end{equation}
+and the first boundary condition gives $y(0)=C_1=0$ and so the second
+is now $y(\pi/2)=C_2\sin{\pi/2}=C_2=1$ so the solution is
+\begin{equation}
+  y(x)=\sin{2x}
+\end{equation}
+
+You will notice that we have only chosen the simplest examples in the
+complex case, there are more complicated examples where the $r$
+solutions have the form $r=a\pm bi$ and these will give solutions that
+oscillate but with an oscillation amplitude that changes. These
+examples aren't really any more difficult, but we won't look at them
+here.
+
+What we will look at briefly is the relationship between second order
+differential equations and first order. It is possible to think of
+second order differential equations as just two first order. This is
+both profound, it is at the heart of the powerful approaches to
+dynamics developed in the nineteenth century and then applied to
+quantum mechanics in the twentieth, and useful: we already know how to
+solve first order differential equations numerically on a
+computer. The key to this method is to think about dynamics were we
+consider position and speed different quantities, so say we have the differential equation
+\begin{equation}
+  \ddot{u}+ a\dot{u}+bu=0
+\end{equation}
+and we let
+\begin{equation}
+  \dot{u}=v
+\end{equation}
+that is, we introduce a new function $v$, now $\ddot{u}=\dot{v}$ and so the differential equation for $u$ becomes
+\begin{equation}
+  \dot{v}+av+bu=0
+\end{equation}
+so we know have two first order differential equations, $\dot{u}=v$
+and $\dot{v}+av+bu=0$; these are coupled, there are $u$s in the $v$
+equation and $v$s in the $u$ equation, but uncoupling them is actually
+just a process of linear algebra. Again, we won't go any further with
+this, but hopefully you can see how this reduces the second order
+problem to a first order one, albeit a first order differential
+equation with vectors $(u,v)$ and matrices; this does unlock computer
+approaches to numerical solution.
+
+\section*{Summary}
+Here we look at second order homogeoneous, linear ordinary
+differential equations, the ansatz $y=A\exp{rt}$ usually works, giving
+a quadratic equation for $r$ and hence, in general two solutions, or a two-dimensional family of solutions
+\begin{equation}
+  y=A_1e^{r_1t}+A_2e^{r_2t}
+\end{equation}
+There are cases where the quadratic equation only has one solution, it
+is still possible to get a two-dimensional family of solutions but we
+don't look at that here. Often the constants $A_1$ and $A_2$ are fixed
+by initial or boundary conditions. If $r$ is imaginary the solution
+can be written in terms of sines and cosines, this is a periodic
+solution. A simple trick allows us to chanage a second-order equation
+into two first order equations.
+
+
+\end{document}
+
