@@ -1,0 +1,184 @@
+%ps1.tex
+%notes for the course Probability and Statistics COMS10011 
+%taught at the University of Bristol
+%2019_20 Conor Houghton conor.houghton@bristol.ac.uk
+
+%To the extent possible under law, the author has dedicated all copyright 
+%and related and neighboring rights to these notes to the public domain 
+%worldwide. These notes are distributed without any warranty. 
+
+\documentclass[11pt,a4paper]{scrartcl}
+\typearea{12}
+\usepackage{graphicx}
+%\usepackage{pstricks}
+\usepackage{listings}
+\usepackage{color}
+\lstset{language=C}
+\usepackage{fancyhdr}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\pagestyle{fancy}
+\lhead{\texttt{github.com/coms10013/2022\_23} and  \texttt{coms10013.github.io}}
+\lfoot{COMS10013 - ws5 - Conor}
+\begin{document}
+
+\section*{COMS10013 - Analysis - WS4}
+
+These worksheets are partly, well mostly, taken from worksheets prepared by Chloe Martindale.
+
+\subsection*{Useful facts and reminders}
+
+\begin{itemize}
+\item \textbf{Integrating factor} The best approach to inhomogeneous first order equations, the integrating factor has the advantage that it also works for equations with non-constant coefficients, here though we consider the constant coefficient case. If
+  \begin{equation}
+    \frac{df}{dt}+rf=g(t)
+  \end{equation}
+  multiply both sides by $\exp{rt}$ and apply the product rule `backwards' to get
+  \begin{equation}
+    \frac{d}{dt}fe^{rt}=g(t)e^{rt}
+  \end{equation}
+  which gives
+  \begin{equation}
+    f=e^{-rt}\int g(t)e^{rt}
+  \end{equation}
+
+
+\item \textbf{The particular and general solutions} If the equation is inhomogenous, the ansatz will often work then as well, but will give a value for $A$, this is called the \textbf{particular solution}; to get the general solution you will need to also solve the corresponding homogenous equation, the one you get by dropping the inhomogenous part, if you add this solution to the particular solution you still get a solution to the inhomogenous equation, the \textbf{general solution}. Here is an example
+  \begin{equation}
+    \dot{y}=-y+\exp{3t}
+  \end{equation}
+  Substitute $y=A\exp{\lambda t}$ to get
+  \begin{equation}
+    \lambda Ae^{\lambda t}=-Ae^{\lambda t}+e^{3t}
+  \end{equation}
+  so the ansatz solves the equation if $\lambda=3$ and $A=1/4$. Now solve
+  \begin{equation}
+    \dot{y}=-y
+  \end{equation}
+  The ansatz says $y=A\exp{-t}$ solves this and so
+  \begin{equation}
+    y=Ae^{-t}+\frac{1}{4}e^{3t}
+  \end{equation}
+  is the general solution to the original equation; you can check this. $A$ is usually fixed by the inital condition so if $y(0)=1$ for example then $A=3/4$.
+
+\item \textbf{Second order differential equations} Try the $y=A\exp{rt}$ but expect a quadratic in $r$ giving two solutions.
+  
+\end{itemize}
+
+\subsection*{Some indefinite integrals}
+\begin{itemize}
+\item $\int t^ndt =t^{n+1}/(n+1)+C$.
+\item $\int \exp{rt}dt = \exp{rt}/r +C$ where $r$ is constant.
+\item $\int 1/t{} dt = \log{t}+C$
+\item \textbf{substitution}: if $u=u(t)$ then you can change variables inside the integral provided you also let
+  \begin{equation}
+    dt=\frac{1}{du/dt}du
+  \end{equation}
+\item \textbf{integration by parts}: this is the integration version of the product rule:
+  \begin{equation}
+    \int udv =uv-\int vdu
+  \end{equation}
+  As an example
+  \begin{equation}
+    I=\int te^{t/2}dt
+  \end{equation}
+  Now let $dv=\exp{(t/2)}dt$ and $u=t$, integrating the first one gives $v=2\exp{(t/2)}$ and $du=dt$. Hence:
+  \begin{equation}
+    I=2te^{t/2}-2\int e^{t/2}dt=2te^{t/2}-4e^{t/2}+C
+  \end{equation}
+  Everyone hates integrating by parts, but it is very useful. Annoyingly one of the questions makes you integrate by parts twice!
+\item \textbf{mixed trignometric and exponential integrals}. This is a funny trick, say you want to integrate
+  \begin{equation}
+    I=\int e^{at}\sin{t}dt
+  \end{equation}
+  well let $dv=e^{at}dt$ or $v=e^{at}/a$, let $u=\sin{t}$ so $du=\cos{t}dt$ and
+  \begin{equation}
+    I=\frac{1}{a}\sin{t}e^{at}-\frac{1}{a}\int e^{at}\cos{t}dt
+  \end{equation}
+  and now we go again, let $dv=e^{at}dt$ again and $u=\cos{t}$ so $du=-\sin{t}dt$ so
+  \begin{equation}
+    I=\frac{1}{a}\sin{t}e^{at}-\frac{1}{a^2}e^{at}\cos{t}+\frac{1}{a^2}\int e^{at}\sin{t}dt
+  \end{equation}
+  and we've come full circle so
+\begin{equation}
+    I=\frac{1}{a}\sin{t}e^{at}-\frac{1}{a^2}e^{at}\cos{t}-\frac{1}{a^2}I
+  \end{equation}
+or
+\begin{equation}
+  (a^2+1)I=(a\sin{t}-\cos{t})e^{at}
+\end{equation}
+\end{itemize}
+
+
+\subsection*{Questions}
+
+These are the questions you should make sure you work on in the workshop.
+
+\begin{enumerate}
+
+\item \textbf{First order inhomogeneous equations}.
+	\begin{itemize}
+		\item[(a)] $f'(t) + 5f(t) = 1$ with initial condition $f(0) = 2$.
+		\item[(b)] $f'(t) = t - f(t)$ with initial condition $f(1) = 3e^{-1}$.
+		\item[(c)] $f'(t) +2f(t) = \sin(t)$ with initial condition $f(0) = 9/5$.
+		\item[(d)] $f'(t) - 2f(t) + t^2 = 0$ with initial condition $f(2) = 13/4 + 6e^4$.
+	\end{itemize}
+
+
+\item \textbf{Second order equations} Solve the following equations for the given initial conditions:
+	\begin{itemize}
+		\item[(a)] $\ddot{y}(t) = -y(t)$ with initial conditions $y(0) = 1$ and $\dot{y}(0) = 0$.
+		\item[(b)] $\ddot{y}(t) + 4\dot{y}(t) + 3y(t) = 0$ with initial conditions $y(0) = 0$ and $\dot{y}(0) = -2$.
+		\item[(c)] $\ddot{y}(t) + 2\dot{y}(t) + y(t) = 0$ with initial conditions $y(0) = 2$ and $y(1) = 3/e$.
+		\item[(d)] $\ddot{y}(t) - 4\dot{y}(t) + 13y(t) = 0$ with initial conditions $y(0) = 2$ and $y(\pi/6) = e^{\pi/3}$.
+	\end{itemize}
+	
+
+        
+
+\end{enumerate}
+        
+\subsection*{Extra questions}
+
+These are extra questions you might attempt in the workshop or at a
+later time; in fact these questions are tricky so you might want to
+come back to them later when you've had some more lectures.
+
+\begin{enumerate}
+\item \textbf{Second-order differential equations, the special case}.
+	Show that for the homogeneous, linear, second-order differential equation
+	\[a\ddot{y}(t) + b\dot{y}(t) + cy(t) = 0\]
+	with constant coefficients $a,b,c$ for which $a \neq 0$, the
+	function $y(t) = te^{\lambda t}$ is a solution if and only if
+	$b^2 - 4ac = 0$ and $\lambda = -b/2a$.
+
+	\item \textbf{Integrating factors with non-constant coefficients}.
+	Solve the following differential equations with the given initial conditions:
+	\begin{itemize}
+		\item[(a)] $\dot{y}(t) + ty(t) = 0$ with initial condition $y(0) = 1/\sqrt{2\pi}$.
+		\item[(b)] $\dot{y}(t) + (t^2-1)y(t) = 0$ with initial condition $y(1) = 3e^{2/3}$.
+		\item[(c)] $\dot{y}(t) = y(t)/t + 2t$ where $t > 0$ with initial condition $y(5) = 40$.
+		\item[(d)] $t^2\dot{y}(t) + y(t) = e^{1/t}$ where $t>0$ with initial condition $y(2) = 0$.
+	\end{itemize}
+        In this more difficult case you need to work out the integrating factor. Say $u$ is the integrating factor then you have
+        \begin{equation}
+          \frac{duy}{dt}=u\dot{y}+\dot{u}y
+        \end{equation}
+        so you need $\dot{u}=ub(t)$ where $b(t)$ is the thing multiplying $y(t)$, so in the first question we want
+        \begin{equation}
+          \dot{u}=tu
+        \end{equation}
+        or $du/u=t^2$ so $\ln{u}=t^2/2$ and $u=\exp{(t^2/2)}$ so you
+        multiply both across by $\exp{(t^2/2)}$. In fact, you don't
+        need an integating factor to do the first example, it can be
+        done directly by integrating.
+
+          
+        
+\end{enumerate}
+
+
+
+\end{document}
+
