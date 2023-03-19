@@ -13,7 +13,116 @@
 
 \section*{Inhomogenous equations}
 
+First order inhomogeneous linear ordinary differential equations are, in principle, solveable but, in practice, we can't always do the integrals we need to do. Let review, the homogeneous equation is
+\begin{equation}
+  \dot{y}+ay=0
+\end{equation}
+and we can solve this with an ansatz with $y=A\exp{\lambda r}$:
+\begin{equation}
+  r+a=0
+\end{equation}
+or $r=-a$ so the solution is
+\begin{equation}
+  y=Ae^{-at}
+\end{equation}
+Now the inhomgeneous equation looks like this:
+\begin{equation}
+  \dot{y}+ay=f(t)
+\end{equation}
+The hard case is if $a$ depends on $t$; here we restrict ourself to when it is constant.
+
+There are two approaches to solving this, the first, though less
+systematic, is useful because it leads on to how you solve
+inhomogeneous second order equations, though this isn't something we
+do in this unit. In this approach we find a \textsl{particular
+  solution}, that is any solution to the differential equation. There
+is a whole series of ad hoc approaches to this; here well look at the case where $f(t)$ is an exponential, so for example
+\begin{equation}
+  \dot{y}+3y=5e^{-t}
+\end{equation}
+Now, we again use an ansatz of $y=A\exp{\lambda t}$:
+\begin{equation}
+  A\lambda e^{\lambda t}+3Ae^{\lambda t}=5e^{- t}
+\end{equation}
+and for this to work we need $\lambda=-1$, in which case we can cancel the exponentials and get
+\begin{equation}
+  -A+3A=5
+\end{equation}
+or $A=5/2$, hence a particular solution is
+\begin{equation}
+  y=\frac{5}{2}e^{-t}
+\end{equation}
+However this has no arbitrary constant and we expect that there should be one. However, consider the \textsl{corresponding homogeneous solution}:
+\begin{equation}
+  \dot{z}+3z=0
+\end{equation}
+This is solved by $z=A\exp{-3z}$. Now, thinking about the more general case, if we have a particualr solution to the inhomogeneous equation, say $y_p$, and we substitute in $y_p+z$ we get
+\begin{equation}
+  \dot{y_p+z}+a(y_p+z)=f(t)
+\end{equation}
+and so
+\begin{equation}
+  \dot{z}+az+\dot{y_p}+ay_p=f(t)
+\end{equation}
+and this works because $\dot{z}+az=0$ and $\dot{y_p}+ay_p=f(t)$. In out specific case the solution is
+\begin{equation}
+  y=\frac{5}{2}e^{-t}+Ae^{-3t}
+\end{equation}
+Obviously this approach would fail have failed if $f(t)=5\exp{-3t}$, or indeed if $f(t)$ had been something that wasn't an exponential; in fact there is a whole recipe book of how to find the particular solution in different circumstances, but as alluded to above, the actual application of these approaches is in the second order case. Here there is a more robust approach, called the \textsl{integrating factors}.
+
+As mentioned before, you can simplify a differential equation by putting the $\dot{y}$ and $y$ terms together, basically for
+\begin{equation}
+  \dot{y}+ay=f(t)
+\end{equation}
+if you multiply across by $\exp{at}$, known as an integrating factor, you get
+\begin{equation}
+  \dot{y}e^{at}+aye^{at}=f(t)e^{at}
+\end{equation}
+Now the left hand side can be thought of as the outcome of applying the chain rule
+\begin{equation}
+  \frac{d}{dt}\left(ye^{at}\right)=\dot{y}e^{at}+aye^{at}
+\end{equation}
+so the equation becomes
+\begin{equation}
+  \frac{d}{dt}\left(ye^{at}\right)=f(t)e^{at}
+\end{equation}
+and this can be solved by direct integration
+\begin{equation}
+  ye^{at}=\int f(t)e^{at}dt
+\end{equation}
+or
+\begin{equation}
+  y=e^{-at}\int f(t)e^{at}dt
+\end{equation}
+Thus if we can do the integral on the right hand side, we can solve
+the differential equation. In a way solving a differential equation is
+always, implicitly or explicitly about doing an integral, so if you
+can't do this integral you aren't going to be able to solve the
+differential equation another way.
+
+Let look at the simple example from above
+\begin{equation}
+  \dot{y}+3y=5e^{-t}
+\end{equation}
+is solved by
+\begin{equation}
+  y=5e^{-3t}\int e^{-t}e^{3t}dt = 5e^{-3t}\int e^{2t}dt = \frac{5}{2}e^{-3t}\left(e^{2t}+A\right)
+\end{equation}
+or
+\begin{equation}
+  y=\frac{5}{2}e^{-t}+Ae^{-3t}
+\end{equation}
+where we have rescaled the arbitrary constant.
+
 \section*{Summary}
-  
+You can solve first order inhomogeneous linear ordinary differential
+equations with constant coefficients by finding a particular solution,
+often by ansatz, and then adding the solution to the corresponding
+homogenous equation. This gives the general solution and this approach
+is more educational rather than useful since it is more important in
+the second order case. The other, more useful approach, is to multiply
+by an integrating factor and doing the resulting integral.
+
+
 \end{document}
 
