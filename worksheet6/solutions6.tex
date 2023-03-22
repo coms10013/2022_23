@@ -1,0 +1,117 @@
+%ps1.tex
+%notes for the course Probability and Statistics COMS10011 
+%taught at the University of Bristol
+%2019_20 Conor Houghton conor.houghton@bristol.ac.uk
+
+%To the extent possible under law, the author has dedicated all copyright 
+%and related and neighboring rights to these notes to the public domain 
+%worldwide. These notes are distributed without any warranty. 
+
+\documentclass[11pt,a4paper]{scrartcl}
+\typearea{12}
+\usepackage{graphicx}
+%\usepackage{pstricks}
+\usepackage{listings}
+\usepackage{color}
+\lstset{language=C}
+\usepackage{fancyhdr}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\pagestyle{fancy}
+\lhead{\texttt{github.com/coms10013/2022\_23} and  \texttt{coms10013.github.io}}
+\lfoot{COMS10013 - solutions 6 - Conor}
+\begin{document}
+
+\section*{COMS10013 - Analysis - WS6 - outline solutions}
+
+\subsection*{Questions}
+
+
+\begin{enumerate}
+
+\item \textbf{Differentiation}. Differentiate this functions:
+	\begin{itemize}
+		\item[(a)] $f(t)=\sin{t^2}$; chain rule, $\dot{f}=2t\sin{t^2}$.
+		\item[(b)] $f(t)=\tan{t}$: quotient rule with $u=\sin{t}$ and $v=\cos{t}$ giving $1/\cos^2{t}$ since $\sin^2{t}+\cos^2{t}=1$.
+		\item[(c)] $f(t)=1/(1+t^2)$: chain rule again, $-2t/(1+t^2)^2$.
+		\item[(d)] $f(t)=\log{\exp{(t)}}$: trick question since this is just $t$.
+	\end{itemize}
+
+      \item \textbf{Integration}. What is the indefinite integral $\int t\sin{(t)}dt$? What about $\int \sin{(t)}\cos{(t)}dt$? Everyone hates integrating by parts but here we go, for the first one let $u=t$ and $dv=d\sin{t}dt$ so $du=dt$ and $v=-\cos{t}$ so the answer is $-t\cos{t}+\int cos{t}dt = -t\cos{t}+\sin{t}+C$; the second one is more difficult, well it is easy if you just use $2\sin{t}\cos{t}=\sin{2t}$ but you were asked to do it by parts, let:
+        \begin{equation}
+          I=\int \sin{(t)}\cos{(t)}dt
+        \end{equation}
+        Now $u=\sin{(t)}$ and $dv=\cos{(t)dt}$ and they both sort of swap
+        \begin{equation}
+          I=\sin^2{(t)}-I
+        \end{equation}
+        giving $2I=\sin^2{t}$; so yeah everyone hates integrating by parts but that one is sort of fun.
+       
+
+      \item \textbf{Integration}. There is no indefinite integral
+        $\int \exp{(t^2)}dt$; have a go at failing to find one: no
+        solution here, which is kind of the point.
+
+       \item \textbf{Partial fractions}. 
+         Now try
+         \begin{equation}
+           F=\frac{1}{(t-3)(3t+1)}
+         \end{equation}
+         Well same craic:
+         \begin{equation}
+           \frac{1}{(t-3)(3t+1)}=\frac{A}{t-3}+\frac{B}{3t+1}
+         \end{equation}
+         and multiply across
+         \begin{equation}
+           1=A(3t+1)+B(t-3)
+           \end{equation}
+             and $t=3$ gives $A=1/10$ and $t=-1/3$ gives $B=-3/10$ so
+             \begin{equation}
+               \frac{1}{(t-3)(3t+1)}=\frac{1}{10(t-3)}-\frac{3}{10(3t+1)}
+             \end{equation}             
+      Now use that to work out the indefinite integral
+         \begin{equation}
+           I=\int \frac{dt}{(t-3)(3t+1)}
+         \end{equation}
+         Well the idea here is that
+         \begin{equation}
+           I=\frac{1}{10}\int\frac{dt}{t-3}-\frac{3}{10}\int\frac{dt}{3t+1}
+         \end{equation}
+         and these integrals are easy, by sustitution using $u=t-3$ and so $dt=du$ for the first one and $u=3t+1$ so $dt=du/3$ in the second, hence
+         \begin{equation}
+           I=\frac{1}{10}\log{(t-3)}-\frac{1}{10}\log{(3t+1)}
+         \end{equation}
+         
+       \item \textbf{The Laplace transform}. The transform maps a function $f(t)$ to another function $F(s)$:
+         \begin{equation}
+           F(s)=\int_0^\infty f(t)e^{-st}dt
+         \end{equation}
+         What is the Laplace transform of $f(t)=\exp{at}$? Well
+         \begin{equation}
+           F(s)=\int_0^\infty e^{at}e^{-st}dt
+         \end{equation}
+         and $\exp{(at)}\exp{(-st)}=\exp{[(a-s)t]}$ and hence
+         \begin{equation}
+           F(s)=\frac{1}{s-a}
+         \end{equation}
+         Now consider the differential equation
+         \begin{equation}
+           \frac{df}{dt}=3f
+         \end{equation}
+         with $f(0)=2$. Now from the above
+         \begin{equation}
+           sF(s)-2=3F(s)
+         \end{equation}
+         so $(s-3)F(s)=2$ or
+         \begin{equation}
+           F(s)=\frac{2}{s-3}
+         \end{equation}
+         and hence $f(t)=2e^{3t}$, which you can easily check is correct. This works for more complicated cases too, but you will generally need a few more rows in your Laplace transform table.
+        
+\end{enumerate}
+
+
+
+\end{document}
+
