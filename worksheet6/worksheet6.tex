@@ -1,0 +1,202 @@
+%ps1.tex
+%notes for the course Probability and Statistics COMS10011 
+%taught at the University of Bristol
+%2019_20 Conor Houghton conor.houghton@bristol.ac.uk
+
+%To the extent possible under law, the author has dedicated all copyright 
+%and related and neighboring rights to these notes to the public domain 
+%worldwide. These notes are distributed without any warranty. 
+
+\documentclass[11pt,a4paper]{scrartcl}
+\typearea{12}
+\usepackage{graphicx}
+%\usepackage{pstricks}
+\usepackage{listings}
+\usepackage{color}
+\lstset{language=C}
+\usepackage{fancyhdr}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\pagestyle{fancy}
+\lhead{\texttt{github.com/coms10013/2022\_23} and  \texttt{coms10013.github.io}}
+\lfoot{COMS10013 - ws6 - Conor}
+\begin{document}
+
+\section*{COMS10013 - Analysis - WS6}
+
+It is difficult to ask exam questions about optimization beyond a few
+factual queries; here I have asked some more questions about
+calculus. Some are difficult and most stray beyond this unit, if they
+were asked as exam questions there would be lots of hints and
+guidance; it would not be assumed you could do them based only on your
+existing knowledge.
+
+\subsection*{Some differential calculus}
+\begin{itemize}
+\item polynomials: $dx^n/dx=nx^{n-1}$
+\item special function: $d\sin{x}/dx=\cos{x}$, $d\cos{x}/dx=-\sin{x}$, $d\exp{x}/dx=\exp{x}$, $d\log{x}/dx=1/x$.
+\item product rule:
+$$\frac{d}{dx}uv = \frac{du}{dx}v+u\frac{dv}{dx}$$
+\item quotient rule:
+$$\frac{d}{dx}\frac{u}{v}=\frac{\frac{du}{dv}v-u\frac{dv}{dx}}{v^2}$$
+\item chain rule:
+$$\frac{d}{dx}u(v(x))=\frac{du}{dv}\frac{dv}{dx}$$
+\end{itemize}
+  
+\subsection*{Some indefinite integrals}
+\begin{itemize}
+\item $\int t^ndt =t^{n+1}/(n+1)+C$.
+\item $\int \exp{rt}dt = \exp{rt}/r +C$ where $r$ is constant.
+\item $\int 1/t{} dt = \log{t}+C$
+\item \textbf{substitution}: if $u=u(t)$ then you can change variables inside the integral provided you also let
+  \begin{equation}
+    dt=\frac{1}{du/dt}du
+  \end{equation}
+\item \textbf{integration by parts}:
+  \begin{equation}
+    \int udv =uv-\int vdu
+  \end{equation}
+  or for definite integrals
+  \begin{equation}
+    \int_a^b udv =\left.uv\right|_a^b-\int_a^b vdu
+  \end{equation}
+  
+\end{itemize}
+
+
+\subsection*{Questions}
+
+These are the questions you should make sure you work on in the workshop.
+
+\begin{enumerate}
+
+\item \textbf{Differentiation}. Differentiate this functions:
+	\begin{itemize}
+		\item[(a)] $f(t)=\sin{t^2}$
+		\item[(b)] $f(t)=\tan{t}$
+		\item[(c)] $f(t)=1/(1+t^2)$
+		\item[(d)] $f(t)=\log{\exp{(t)}}$
+	\end{itemize}
+
+      \item \textbf{Integration}. What is the indefinite integral $\int t\sin{(t)}dt$? What about $\int \sin{(t)}\cos{(t)}dt$? If you didn't do the second one by parts, do it again by parts!
+
+      \item \textbf{Integration}. There is no indefinite integral $\int \exp{(t^2)}dt$; have a go at failing to find one.
+
+       \item \textbf{Partial fractions}. A common strategy that is
+         used in differentiation is the partial fraction expansion. It
+         is a technique for simplifying a fraction, here we'll look at
+         the easiest case. Say you have
+         \begin{equation}
+           F=\frac{1}{(2t+1)(t-1)}
+         \end{equation}
+         and you want to simplify it, you assume you can write
+         \begin{equation}
+           \frac{1}{(2t+1)(t-1)}=\frac{A}{2t+1}+\frac{B}{t-1}
+         \end{equation}
+         for some $A$ and $B$; now you need to find $A$ and $B$; first we multiply across by $(2t+1)(t-1)$ to get
+         \begin{equation}
+           1=A(t-1)+B(2t+1)
+         \end{equation}
+         This equation has to work for every value for $t$, which means it has to work for $t=1$, substituting in $t=1$ gives $1=3B$ or $B=1/3$; it also has to work for $t=-1/2$ and substituting in for that gives $1=-3A/2$ or $A=-2/3$ so
+         \begin{equation}
+           F=-\frac{2}{3(2t+1)}+\frac{1}{3(t-1)}
+         \end{equation}
+         Now try
+         \begin{equation}
+           F=\frac{1}{(t-3)(3t+1)}
+         \end{equation}
+         and use that to work out the indefinite integral
+         \begin{equation}
+           I=\int \frac{dt}{(t-3)(3t+1)}
+         \end{equation}
+
+       \item \textbf{The Laplace transform}. The Laplace transform is an alternative technique for solving differential equations, it is very good at solving differential equations which terms in the equations have discontinuous changes and delays and so it is useful for electronic engineering where there is a need to study currents in circuits with switches. The transform maps a function $f(t)$ to another function $F(s)$:
+         \begin{equation}
+           F(s)=\int_0^\infty f(t)e^{-st}dt
+         \end{equation}
+         where, here, we assume $t$ and $s$ are positive. So if $f(t)=1$ a constant
+         \begin{equation}
+           F(s)=\int_0^{\infty}e^{-st}dt=\frac{1}{s}\left.e^{-st}\right|_{t=0}^{\infty} e^{-st}=\frac{1}{s}
+         \end{equation}
+         What is the Laplace transform of $f(t)=\exp{at}$? The useful property of the Laplace transform is what it does to the derivative. Say $f(t)$ has Laplace transform $F(s)$ then consider the Laplace transform of $df/dt$, using integration by parts:
+         \begin{equation}
+           \int_0^\infty\frac{df}{dt}e^{-st}dt=\left.f(t)e^{-st}\right|_0^\infty +s\int_0^{\infty}f(s)e^{-st}dt
+         \end{equation}
+         However the last term contains the formula for $F(s)$ and so we see
+         \begin{align}
+           f(t)&\rightarrow F(s)\cr
+           \dot{f}(t)&\rightarrow sF(s)-f(0)
+         \end{align}
+         Now consider the differential equation
+         \begin{equation}
+           \frac{df}{dt}=3f
+         \end{equation}
+         with $f(0)=2$. Take the Laplace transform of the equation,
+         solve the resulting algebraic equation for $F(s)$ and then
+         try to do the inverse transform to get $f(t)$: this just
+         involves staring at the small table you have of Laplace
+         transforms and working out what function will give you the
+         function of $F(s)$ you have calculated. We won't go into it,
+         but the Laplace transform has nice linearity properties.
+         
+        
+
+\end{enumerate}
+        
+\subsection*{Extra questions}
+
+These are extra questions you might attempt in the workshop or at a
+later time; in fact these questions are tricky so you might want to
+come back to them later when you've had some more lectures.
+
+\begin{enumerate}
+\item \textbf{Divergence and Laplacian}. The divergence of a vector is
+  a sort of complement to the gradient of a function. If
+  \begin{equation}
+    \mathbf{v}(x,y)=[v_1(x,y),v_2(x,y)]
+  \end{equation}
+  is a vector function in two dimensions then the divergence is
+  \begin{equation}
+    \textrm{div}\mathbf{v}=\frac{\partial v_1}{\partial x}+\frac{\partial v_2}{\partial y}
+  \end{equation}
+  This can be written as
+  \begin{equation}
+    \textrm{div}\mathbf{v}=\nabla\cdot\mathbf{v}
+  \end{equation}
+  Now if you have a function $f(x,y)$ we define the Laplacian as
+  \begin{equation}
+    \Delta f=\nabla\cdot\nabla(f)=\textrm{div}\,\textrm{grad}\,f
+  \end{equation}
+  write this down in terms of partial derivatives. How is it related to the Hessian?
+
+ \item \textbf{Curl}. After gradient and divergence, the curl fills out the list of vector differential operators, weirdly it only exists in three dimensions. If 
+\begin{equation}
+    \mathbf{v}=[v_1,v_2,v_3]
+  \end{equation}
+is a vector function then
+\begin{equation}
+    \textrm{curl}\,\mathbf{v}=\left[\frac{\partial v_3}{\partial y}-\frac{\partial v_2}{\partial z},\frac{\partial v_1}{\partial z}-\frac{\partial v_3}{\partial x},\frac{\partial v_2}{\partial x}-\frac{\partial v_1}{\partial y}\right]
+  \end{equation}
+if $f(x,y,z)$ is a function in three dimensions what is $\textrm{curl}\,\textrm{div}\,f$?
+
+\item \textbf{Quaternions}. The quaternions are a type of generalization of complex numbers; they have some deep mathematical properties but in practice they are usually used to help describe rotations in three-dimensional space. Instead of just $i$ there are three imaginary numbers $i$, $j$ and $k$, and these all square to minus one: $i^2=j^2=k^2=-1$. In addition $ijk=-1$ and the numbers are \textsl{anti-commutative}: $ij=-ji$, $jk=-kj$ and so on. Lots of other relationships can be derived from these rules, for example if you multiply $ijk=-1$ you get $jk=i$, or if you switch it $jik=1$ and multiply by $j$ you get $ik=1$. Anyway, if
+  \begin{equation}
+    q=w+xi+yj+zk
+  \end{equation}
+  and
+  \begin{equation}
+    q^*=w-xi-yj-zk
+  \end{equation}
+  prove
+  \begin{equation}
+    qq^*=w^2+x^2+y^2+z^2
+  \end{equation}
+  
+        
+\end{enumerate}
+
+
+
+\end{document}
+
