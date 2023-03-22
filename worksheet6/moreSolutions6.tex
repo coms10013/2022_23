@@ -1,0 +1,97 @@
+%ps1.tex
+%notes for the course Probability and Statistics COMS10011 
+%taught at the University of Bristol
+%2019_20 Conor Houghton conor.houghton@bristol.ac.uk
+
+%To the extent possible under law, the author has dedicated all copyright 
+%and related and neighboring rights to these notes to the public domain 
+%worldwide. These notes are distributed without any warranty. 
+
+\documentclass[11pt,a4paper]{scrartcl}
+\typearea{12}
+\usepackage{graphicx}
+%\usepackage{pstricks}
+\usepackage{listings}
+\usepackage{color}
+\lstset{language=C}
+\usepackage{fancyhdr}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\pagestyle{fancy}
+\lhead{\texttt{github.com/coms10013/2022\_23} and  \texttt{coms10013.github.io}}
+\lfoot{COMS10013 - ws6 - more solutions - Conor}
+\begin{document}
+
+\section*{COMS10013 - Analysis - WS6 - more outline solutions}
+        
+\subsection*{Extra questions}
+
+\begin{enumerate}
+\item \textbf{Divergence and Laplacian}. The divergence of a vector is
+  a sort of complement to the gradient of a function. If
+  \begin{equation}
+    \mathbf{v}(x,y)=[v_1(x,y),v_2(x,y)]
+  \end{equation}
+  is a vector function in two dimensions then the divergence is
+  \begin{equation}
+    \textrm{div}\mathbf{v}=\frac{\partial v_1}{\partial x}+\frac{\partial v_2}{\partial y}
+  \end{equation}
+  This can be written as
+  \begin{equation}
+    \textrm{div}\mathbf{v}=\nabla\cdot\mathbf{v}
+  \end{equation}
+  Now if you have a function $f(x,y)$ we define the Laplacian as
+  \begin{equation}
+    \Delta f=\nabla\cdot\nabla(f)=\textrm{div}\,\textrm{grad}\,f
+  \end{equation}
+  write this down in terms of partial derivatives. How is it related to the Hessian? So this is easy enough:
+  \begin{equation}
+    \Delta f=\nabla\cdot [f_x,f_y]=f_{xx}+f_{yy}
+  \end{equation}
+  and this is the trace of the Hessian.
+
+  
+ 
+ \item \textbf{Curl}. After gradient and divergence, the curl fills out the list of vector differential operators, weirdly it only exists in three dimensions. If 
+\begin{equation}
+    \mathbf{v}=[v_1,v_2,v_3]
+  \end{equation}
+is a vector function then
+\begin{equation}
+    \textrm{curl}\,\mathbf{v}=\left[\frac{\partial v_3}{\partial y}-\frac{\partial v_2}{\partial z},\frac{\partial v_1}{\partial z}-\frac{\partial v_3}{\partial x},\frac{\partial v_2}{\partial x}-\frac{\partial v_1}{\partial y}\right]
+  \end{equation}
+if $f(x,y,z)$ is a function and $\textbf{v}(x,y,z)$ a vector function, both in three dimensions what are $\textrm{curl}\,\textrm{grad}\,f$ and $\textrm{div}\,\textrm{curl}\,\textbf{v}$? Again, this is easy that it sounds, I think.
+\begin{equation}
+  \textrm{curl}\,\textrm{grad}\,f=\textrm{curl}\,[f_x,f_y,f_z]
+\end{equation}
+and hence
+\begin{equation}
+  \textrm{curl}\,\textrm{grad}\,f=[f_{zy}-f_{yz},f_{xz}-f_{zx},f_{yx}-f_{xy}]=\mathrm{0}
+\end{equation}
+For the other one
+\begin{equation}
+  \textrm{div}\,\textrm{curl}\,\textbf{v}=\textbf{div}(v_{3y}-v_{2z},v_{1z}-v_{3x},v_{2x}-v_{1y})=v_{3yx}-v_{2zx}+v_{1zy}-v_{3xy}+v_{2xz}-v_{1yz}
+\end{equation}
+and, since the order of the differentiation doesn't matter, this all cancels. These formula play a surprisingly important role in differential topology, which studies the relationships between differential operators, like these, and the shapes of spaces.
+
+\item \textbf{Quaternions}. The quaternions are a type of generalization of complex numbers; they have some deep mathematical properties but in practice they are usually used to help describe rotations in three-dimensional space. Instead of just $i$ there are three imaginary numbers $i$, $j$ and $k$, and these all square to minus one: $i^2=j^2=k^2=-1$. In addition $ijk=-1$ and the numbers are \textsl{anti-commutative}: $ij=-ji$, $jk=-kj$ and so on. Lots of other relationships can be derived from these rules, for example if you multiply $ijk=-1$ you get $jk=i$, or if you switch it $jik=1$ and multiply by $j$ you get $ik=1$. Anyway, if
+  \begin{equation}
+    q=w+xi+yj+zk
+  \end{equation}
+  and
+  \begin{equation}
+    q^*=w-xi-yj-zk
+  \end{equation}
+  prove
+  \begin{equation}
+    qq^*=w^2+x^2+y^2+z^2
+  \end{equation}
+ This is just a big calculation and everything cancels! 
+        
+\end{enumerate}
+
+
+
+\end{document}
+
