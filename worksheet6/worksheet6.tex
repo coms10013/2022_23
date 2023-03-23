@@ -39,7 +39,7 @@ existing knowledge.
 \item product rule:
 $$\frac{d}{dx}uv = \frac{du}{dx}v+u\frac{dv}{dx}$$
 \item quotient rule:
-$$\frac{d}{dx}\frac{u}{v}=\frac{\frac{du}{dv}v-u\frac{dv}{dx}}{v^2}$$
+$$\frac{d}{dx}\frac{u}{v}=\frac{\frac{du}{dx}v-u\frac{dv}{dx}}{v^2}$$
 \item chain rule:
 $$\frac{d}{dx}u(v(x))=\frac{du}{dv}\frac{dv}{dx}$$
 \end{itemize}
@@ -178,7 +178,7 @@ is a vector function then
 \begin{equation}
     \textrm{curl}\,\mathbf{v}=\left[\frac{\partial v_3}{\partial y}-\frac{\partial v_2}{\partial z},\frac{\partial v_1}{\partial z}-\frac{\partial v_3}{\partial x},\frac{\partial v_2}{\partial x}-\frac{\partial v_1}{\partial y}\right]
   \end{equation}
-if $f(x,y,z)$ is a function in three dimensions what is $\textrm{curl}\,\textrm{div}\,f$?
+if $f(x,y,z)$ is a function and $\textbf{v}(x,y,z)$ a vector function, both in three dimensions what are $\textrm{curl}\,\textrm{grad}\,f$ and $\textrm{div}\,\textrm{curl}\,\textbf{v}$?
 
 \item \textbf{Quaternions}. The quaternions are a type of generalization of complex numbers; they have some deep mathematical properties but in practice they are usually used to help describe rotations in three-dimensional space. Instead of just $i$ there are three imaginary numbers $i$, $j$ and $k$, and these all square to minus one: $i^2=j^2=k^2=-1$. In addition $ijk=-1$ and the numbers are \textsl{anti-commutative}: $ij=-ji$, $jk=-kj$ and so on. Lots of other relationships can be derived from these rules, for example if you multiply $ijk=-1$ you get $jk=i$, or if you switch it $jik=1$ and multiply by $j$ you get $ik=1$. Anyway, if
   \begin{equation}
