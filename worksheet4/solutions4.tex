@@ -1,0 +1,109 @@
+%ps1.tex
+%notes for the course Probability and Statistics COMS10011 
+%taught at the University of Bristol
+%2019_20 Conor Houghton conor.houghton@bristol.ac.uk
+
+%To the extent possible under law, the author has dedicated all copyright 
+%and related and neighboring rights to these notes to the public domain 
+%worldwide. These notes are distributed without any warranty. 
+
+\documentclass[11pt,a4paper]{scrartcl}
+\typearea{12}
+\usepackage{graphicx}
+%\usepackage{pstricks}
+\usepackage{listings}
+\usepackage{color}
+\lstset{language=C}
+\usepackage{fancyhdr}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\pagestyle{fancy}
+\lhead{\texttt{github.com/coms10013/2022\_23} and  \texttt{coms10013.github.io}}
+\lfoot{COMS10013 - ws4 - Conor}
+\begin{document}
+
+\section*{COMS10013 - Analysis - WS4 - outline solutions}
+
+This is for the main questions, solutions for the other questions will come later.
+  
+\subsection*{Questions}
+
+These are the questions you should make sure you work on in the workshop.
+
+\begin{enumerate}
+
+\item \textbf{A linear accelerated motion question}. A train is travelling from Bristol to London Paddinton at the maximum speed of 55.9 m/s, 125 mph, when the driver activates the emergency break. This causes the train to decelerate uniformly at 1.2 m/s$s^2$. How far will the train travel until it stops and how long will this take, in seconds. Do this using differential equations, for example:
+  \begin{equation}
+    \frac{dv}{dt}=-1.2
+  \end{equation}
+  not by looking up formulas.
+	\\
+	\textbf{Solution:}
+	\\
+	Let 
+	\begin{itemize}
+		\item $y(t)$ be the position of the train at time $t$,
+		\item $v(t) = \frac{dy}{dt}$ be the velocity of the train at time $t$.
+		\item $a(t) = \frac{dv}{dt} = \frac{d^2y}{dt^2}$ be the acceleration of the train at time $t$.
+	\end{itemize}
+	It is given that $y(0) = 0$, $v(0) = 55.9$, and that for $t\geq 0$ the acceleration $a(t) = -1.2$ is constant.
+	Then 
+	$$v(t) = \int a(t) dt = \int -1.2 \, dt = -1.2t + v(0) = -1.2t + 55.9.$$
+	So the train reaches velocity $v = 0$ at time $t = 55.9/1.2 \approx 46.6$,
+	that is, after 46.6 seconds.
+	Also the position
+	$$y(t) = \int v(t) dt = \int -1.2t + 55.9 \, dt = 
+	-0.6 t^2 + 55.9 t + y(0) = -0.6 t^2 + 55.9 t.$$
+	So the position of $y$ at the moment the velocity $v$ reaches zero,
+	which we just computed occurs at time $t = 55.9/1.2$, is
+	$$y(55.9/1.2) = -0.6 \cdot (55.9/1.2)^2 + 55.9 \cdot (55.9/1.2) \approx 1302.0,$$
+	i.e., 1302 metres further on from the point when the brake was activated.
+
+
+  
+\item \textbf{Types of differential equations}
+  Write down (but don't solve) an example of a differential equation that is:
+  \begin{itemize}
+  \item[(a)] First-order, linear but not homogeneous, with constant coefficients.
+  \item[(b)] First-order, linear, homogeneous but without constant coefficients.
+  \item[(c)] Second-order, linear, homogeneous, with constant coefficients.
+  \item[(d)] Second-order, linear, not homogeneous, without constant coefficients.
+  \end{itemize}
+	\textbf{Solution:}
+	\begin{itemize}
+		\item[(a)] Anything of the form
+		\[ay'(x) + by(x) = c,\]
+		where $a,b,c$ are independent of $x$ and $y$, and $a$ and $c$ are non-zero.
+		\item[(b)] Anything of the form
+		\[a(x)y'(x) + b(x)y(x) = 0,\]
+		where at least one of $a(x)$ and $b(x)$ is non-constant, and $a$ is non-zero.
+		\item[(c)] Anything of the form
+		\[ay''(x) + by'(x) + cy(x) = 0,\]
+		where $a,b,c$ are independent of $x$ and $y$ and $a$ is non-zero.
+		\item[(d)] Anything of the form
+		\[a(x)y''(x) + b(x)y'(x) + c(x)y(x) = d(x),\]
+		where at least one of $a(x), b(x), c(x), d(x)$ is non-constant, and
+		$a(x)$ and $d(x)$ are non-zero.
+	\end{itemize}
+
+
+  
+\item \textbf{Differential equations} Solve the following, linear,
+  homogeneous, first-order, constant coefficients, differential
+  equations once using separation of variables and once with the
+  \emph{ansatz}.
+	\begin{itemize}
+		\item[(a)] $\dot{y}(t) - y(t) = 0$ with initial condition $y(0) = 2$: this is the classic: $y=A\exp{t}$ and the initial condition gives $A=2$.
+		\item[(b)] $\dot{y}(t) + 3y(t) = 0$ with initial condition $y(3) = 3$: this one isn't much different, $y=A\exp{-3t}$ and the intial conditionisn't an initial condition, which is sneaky, but $A\exp{-9}=3$ so $A=3\exp{9}$.
+		\item[(c)] $\dot{y}y(t) = 0$ with  initial condition $y(5) = 2$: oh dear, this was typo, but lets pretend it wasn't.
+                  $$\dot{y}y=\frac{1}{2}\frac{dy^2}{dt}$$
+                  so integrating give $y^2=C$ or, with some sloppiness renaming the arbitrary constant, $y=C$ and then $y(5)=2$ tells us that $C=2$. 
+		\item[(d)] $\dot{y}(t) + 5y(t) = 0$ with initial condition
+                  $y(1) = 1$. Not sure what the point here is, it's the same as the others really, $y=A\exp{(-5t)}$ and the condition tells us that $A=\exp{5}$.
+	\end{itemize}
+
+\end{enumerate}
+
+\end{document}
+
