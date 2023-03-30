@@ -1,0 +1,97 @@
+%ps1.tex
+%notes for the course Probability and Statistics COMS10011 
+%taught at the University of Bristol
+%2019_20 Conor Houghton conor.houghton@bristol.ac.uk
+
+%To the extent possible under law, the author has dedicated all copyright 
+%and related and neighboring rights to these notes to the public domain 
+%worldwide. These notes are distributed without any warranty. 
+
+\documentclass[11pt,a4paper]{scrartcl}
+\typearea{12}
+\usepackage{graphicx}
+%\usepackage{pstricks}
+\usepackage{listings}
+\usepackage{color}
+\lstset{language=C}
+\usepackage{fancyhdr}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\pagestyle{fancy}
+\lhead{\texttt{github.com/coms10013/2022\_23} and  \texttt{coms10013.github.io}}
+\lfoot{COMS10013 - ws5 - Conor}
+\begin{document}
+
+\section*{COMS10013 - Analysis - WS4 - outline solutions}
+
+Outline solutions for the main questions.
+
+\subsection*{Questions}
+
+These are the questions you should make sure you work on in the workshop.
+
+\begin{enumerate}
+
+\item \textbf{First order inhomogeneous equations}.
+	\begin{itemize}
+	\item[(a)] $f'(t) + 5f(t) = 1$ with initial condition $f(0) = 2$: well staring it at a bit $f(t)=1/5$ is a particular solution and so
+          $$y(t)=Ae^{-5t}+\frac{1}{5}$$
+          is the generali solution. Putting $f(0)=2$ gives $A=9/5$.
+	\item[(b)] $f'(t) = t - f(t)$ with initial condition $f(1) = 3e^{-1}$: again, rather than using integrating factors you can just stare at this one a bit, or substitute in $f(t)=at+b$ so $f'(t)=a$ and hence $a=t-at-b$ so $a=1$ and $b=-a$ or $f(t)=t-1$ is a particular solution and so the general solution is
+          $$f(t)=Ae^{-t}+t-1$$
+          The so called initial condition gives
+          $$3e^{-1}=Ae{-1}$$
+          so $A=3$.
+	\item[(c)] $f'(t) +2f(t) = \sin(t)$ with initial condition $f(0) = 9/5$: again, you could use an integrating factor here, multiplying both sides by $\exp{2t}$ so
+          $$
+          \frac{d}{dt}e^{2t}f(t)=e^{2t}\sin{(t)}$$
+          but, of course, this gives
+          $$e^{2t}f(t)=\int e^{2t}\sin{(t)} dt$$
+          and, while you could do that by parts, does anyone want to? Let try to use an ansatz:
+          $$f(t)=a\sin{t}+b\cos{t}$$
+          and hence
+          $$a\cos{t}-b\sin{t}+2a\sin{t}+2b\cos{t}=\sin{t}$$
+          so the cosine coefficients give $a+2b=0$ and the sine coefficients give $-b+2a=1$, or $-b-4b=1$ so $b=-1/5$ and $a=2/5$ giving particular solution:
+          $$f(t)=\frac{2}{5}\sin{t}-\frac{1}{5}\cos{t}$$
+          and general solution
+          $$f(t)=\frac{2}{5}\sin{t}-\frac{1}{5}\cos{t}+Ae{-2t}$$
+          If we put in $t=0$ we get
+          $$\frac{9}{5}=-\frac{1}{5}+A$$
+          or $A=2$.          
+	\item[(d)] $f'(t) - 2f(t) + t^2 = 0$ with initial condition $f(2) = 13/4 + 6e^4$. In a now familiar type of laziness lets use an ansatz $f=at^2+bt+c$ to get
+          $$2at+b-2at^2-2bt-2c+t^2=0$$
+          or $a=1/2$, $b=a$ and $b-2c=0$ so $b=1/2$ and $c=1/4$. The general solution is therefore
+          $$f(t)=Ae^{2t}+\frac{t^2}{2}+\frac{t}{2}+\frac{1}{4}$$
+          and substituting gives
+          $$\frac{13}{4}+6e^4=Ae^4+\frac{13}{4}$$
+          and hence $A=6$.
+	\end{itemize}
+
+
+\item \textbf{Second order equations} Solve the following equations for the given initial conditions:
+	\begin{itemize}
+		\item[(a)] $\ddot{y}(t) = -y(t)$ with initial conditions $y(0) = 1$ and $\dot{y}(0) = 0$: if you substitute $y=\exp{rt}$ $r$ will be imaginary so try $y=A\sin{t}+B\cos{t}$ and it works, the initial conditions give $B=1$ and $A=0$. 
+		\item[(b)] $\ddot{y}(t) + 4\dot{y}(t) + 3y(t) = 0$ with initial conditions $y(0) = 0$ and $\dot{y}(0) = -2$: now $y=\exp{(rt)}$ gives
+                  $$r^2+4r+3=0$$
+                  or $(r+1)(r+3)=0$ hence
+                  $$y=Ae^{-t}+Be^{-3t}$$
+                  and $A+B=0$ while $-A-3B=-2$, so $A=-B$ or $B=1$ and $A=-1$.
+                \item[(c)] $\ddot{y}(t) + 2\dot{y}(t) + y(t) = 0$ with initial conditions $y(0) = 2$ and $y(1) = 3/e$: whoops this is hard, $r^2+2r+1=0$, or $(r+1)^2=0$, this is a bit of an unfair question and I will move it to the `extra question part' next year, one solution is $A\exp{(-t)}$ but the other is $Bt\exp{-t}$, this is what happens with the $r$-equation, called the auxiliary equation has a repeated root.
+		\item[(d)] $\ddot{y}(t) - 4\dot{y}(t) + 13y(t) = 0$ with initial conditions $y(0) = 2$ and $y(\pi/6) = e^{\pi/3}$: $r^2-4r+13=0$ gives
+                  $$
+                  r=\frac{4\pm\sqrt{16-52}}{2}=2\pm 3i
+                  $$
+                  Again this is a hard question, the solution is
+                  $$
+                  y=e^{2t}[A\sin{3t}+B\cos{3t}]$$
+                    but this should've gone in the extra questions section.
+	\end{itemize}
+	
+
+\end{enumerate}
+
+
+
+\end{document}
+
