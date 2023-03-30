@@ -1,0 +1,77 @@
+%ps1.tex
+%notes for the course Probability and Statistics COMS10011 
+%taught at the University of Bristol
+%2019_20 Conor Houghton conor.houghton@bristol.ac.uk
+
+%To the extent possible under law, the author has dedicated all copyright 
+%and related and neighboring rights to these notes to the public domain 
+%worldwide. These notes are distributed without any warranty. 
+
+\documentclass[11pt,a4paper]{scrartcl}
+\typearea{12}
+\usepackage{graphicx}
+%\usepackage{pstricks}
+\usepackage{listings}
+\usepackage{color}
+\lstset{language=C}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\lhead{\texttt{github.com/coms10013/2022\_23} and  \texttt{coms10013.github.io}}
+\lfoot{COMS10013 - ws3 - Conor}
+\begin{document}
+
+\section*{COMS10013 - Analysis - WS3 - outline solutions}
+
+These are outline solutions to the main questions in worksheet 2, solutions to the other questions will also appear.
+
+\subsection*{Questions}
+
+These are the questions you should make sure you work on in the workshop.
+
+\begin{enumerate}
+
+\item \textbf{Taylor series} Calculate the Taylor expansion, three or four terms, at $x=0$ for
+	\begin{itemize}
+	\item[(a)] $f(x)=1/(1+x)$: $f'(x)=-1/(1+x)^2$ and $f''(x)=2/(1+x)^3$ and $f'''(x)=-6/(1+x)^4$ and you get the idea, so the factor in front cancels the $1/n!$ in the formula for the Taylor expansion and
+          $$f(x)=1-x+x^2-x^3\ldots$$
+          This satisfying fact is actually very useful.
+	\item[(b)] $f(x)=\log{(1+x)}$: So here everything happens just a little later, so $f'(x)=-1/(1+x)$ and then everything proceeds as before, differentiation-wise and
+          $$f(x)=x-\frac{x^2}{2}+\frac{x^3}{3}-\frac{x^4}{4}\ldots$$
+          Again, this turns out to very useful, for example, in approximations in the variational inference spirit to objective functions in deep learning.
+	\item[(c)] $f(x)=\exp{(x)}$: Ok look by now we know that differentiating the exponential does nothing to it so we get
+          $$f(x)=1+x+\frac{x^2}{2}+\frac{x^3}{6}+\frac{x^4}{24}\ldots$$
+
+\end{itemize}
+
+\item \textbf{Complex numbers}: calculate the following complex numbers in the form $(a+bi)$: 
+	\begin{itemize}
+		\item[(a)] $(2+3i) + (5-2i)$: just add $7+i$.
+		\item[(b)] $(-1+i)(-1-i)$: multiply it out and get 2.
+		\item[(c)] $(1-i)^3$: just multiple it out to get $-2(1+i)$.
+		\item[(d)] $(1+i)/(1-i)$, multiply above and below by the conjugate of the denominator, that is by $1+i$, on the bottom you have $(1+i)(1-i)=2$ and on the top $(1+i)^2=2i$, squaring doesn't always give a purely imaginary number, as it has in the last two examples, that's just a coincidence, or rather the effect of me picking complex numbers of the form $1\pm i$ out of laziness. With way, the answer is $i$. 
+	\end{itemize}
+
+	\item \textbf{More complex numbers}: Compute the real part, imaginary part, norm, and conjugate of the following numbers:
+	\begin{itemize}
+		\item[(a)] $i$: real part is zero and the imaginary part $i$, the conjugate is $-i$ and the norm is one.
+		\item[(b)] $3-2i$: real part 3, imaginary part $-2i$, the conjugate is $3+2i$ and the norm is square root of the number multiplied by its conjugate, so $\sqrt{13}$.
+	\end{itemize}
+	
+	
+	\item  \textbf{Polar form}. Convert between rectangular $(a+ib)$ and polar $re^{i\theta}$ form:
+	\begin{itemize}
+		\item[(a)] $i$: gives $e^{i\pi/2}$.
+		\item[(b)] $2-i$: the norm is $\sqrt{5}$ and the angle is some annoying angle whose tan is $1/2$. 
+		\item[(c)] $3e^{i\pi/2}$ is $3i$.
+		\item[(d)] $e^{1+2i}$, this is also annoying, we have
+                  $$e^{1+2i}=e\times e^{2i}=e[\cos{2}+i\sin{2}]$$
+                  which I guess you could work out with a calculator.
+	\end{itemize}
+
+        
+	
+        
+\end{enumerate}
+
+
+\end{document}
