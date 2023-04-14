@@ -1,0 +1,96 @@
+\documentclass[12pt]{article}
+\usepackage{amsfonts, epsfig}
+\usepackage[authoryear]{natbib}
+\usepackage{graphicx}
+\usepackage{fancyhdr}
+\usepackage{amsmath}
+\pagestyle{fancy}
+\lfoot{\texttt{coms10013.github.io}}
+\lhead{Analysis - 3.1 Taylor expansion - Conor}
+\rhead{\thepage}
+\cfoot{}
+\begin{document}
+
+\section*{The Taylor expansion}
+
+We recall from our ``infinitessimal'' treatment of derivatives that
+\begin{equation}
+  \frac{df}{dt}=\frac{f(t+\delta t)-f(t)}{\delta t}
+\end{equation}
+where $dt$ is regarded in some fictional way as being a number so
+small that we can set it to zero when it is convenient to do so; it is
+obviously inconvenient in the definition above since that would give
+zero over zero. In our previous discussion we saw how this could all
+be made rigorous using the limits and epsilson-delta boxes and so on,
+but we also noted how intuitively useful this picture is.
+
+The formula can be turned around
+\begin{equation}
+  f(t+\delta)\approx f(t)+f'(t)\delta
+\end{equation}
+where $\delta$ isn't an infinitessimal, just a very small number; this
+is also where the formula is approximate; here for convenience later when we have lots of higher derivatives, I use $f'(t)$ rather than $\dot{f}(t)$ to denote the derivated:
+\begin{equation}
+  f'(t)=\left.\frac{df}{dt}\right|_t
+\end{equation}
+Anyway, the formula, $f(t+\delta)\approx f(t)+f'(t)\delta$, makes a
+lot of sense, for simplicity thinking of $t$ as time the formula,
+sometimes called the \textbf{Euler approximation}, says that the value
+of a function after $\delta$ has passed, it the original value plus
+delta times the rate of change; or, the change in the function is the
+rate of change by the time it has spent changing. Of course, this
+leaves out the possibility the rate of change is also changing. To
+give an example from physics, is an object is moving at $v$ the amount
+it moves after $\delta$ time is $v\delta$, but this only works if $v$
+is constant.
+
+In fact, with a bit of thought it is possible to work out formula that
+takes all of this, where this is the rate of change of the rate of change, and the rate of change of that and so on, into account. This is the \textbf{Taylor expansion}: it says
+\begin{equation}
+  f(t+\delta t)=f(t)+f'(t)\delta+\frac{1}{2}f''(t)\delta^2+\frac{1}{6}f'''(t)\delta^3+\ldots
+\end{equation}
+or to avoid the `$\ldots$'
+\begin{equation}
+  f(t+\delta t)=f(t)+\sum_{n=1}^\infty \frac{1}{n!}f^{(n)}(t)\delta^n
+\end{equation}
+where
+\begin{equation}
+  f^{(n)}(t)=\left.\frac{d^nf}{dt^n}\right|_t
+\end{equation}
+and, finally, to write the same thing with different notation
+\begin{equation}
+  f(t+\delta t)=f(t)+\sum_{n=1}^\infty \frac{1}{n!}\left.\frac{d^nf}{dt^n}f\right_t\delta^n
+\end{equation}
+We often say this is the Taylor expansion around $t$, usually $t$ would be a specific value, so the Taylor expansion of $f(t)$ around $t=0$ would be
+\begin{equation}
+  f(\delta t)=f(0)+\sum_{n=1}^\infty \frac{1}{n!}f^{(n)}(0)\delta^n
+\end{equation}
+or, say, around $t=2$
+\begin{equation}
+  f(2+\delta t)=f(2)+\sum_{n=1}^\infty \frac{1}{n!}f^{(n)}(2)\delta^n
+\end{equation}
+
+Whatever the notation, this is a powerful and useful formula. We
+haven't said how often it works; for example, $f(t)$ might have funny
+behaviour, for example if $f(t)=t+1/t$ then the Taylor expansion
+around $t=0$ wouldn't work and, indeed $f(t)$ goes to infinity as $t$
+gets closer to zero. In that case, there is a more general version of
+the Taylor expansion that works, the \textbf{Laurent series}; we don't
+look at that here. We have also ignored the issue of convergence; does
+the error in not doing the sum all the way to infinity get smaller as
+we take more terms. It seems likely that this is the case since the
+$1/n!$ term gets very large, in fact, this is not generally true,
+there are functions for which the series does not work, but, again, we
+are going to ignore that here and think about the large class of
+well-behaved functions whose Taylor expansions are well-behaved.
+
+
+
+
+
+\section*{Summary}
+
+
+
+\end{document}
+
