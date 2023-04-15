@@ -1,0 +1,207 @@
+\documentclass[12pt]{article}
+\usepackage{amsfonts, epsfig}
+\usepackage[authoryear]{natbib}
+\usepackage{graphicx}
+\usepackage{fancyhdr}
+\usepackage{amsmath}
+\usepackage{xcolor}
+\pagestyle{fancy}
+\lfoot{\texttt{coms10013.github.io}}
+\lhead{Analysis - 3.2 Complex numbers - Conor}
+\rhead{\thepage}
+\cfoot{}
+\begin{document}
+
+\section*{Complex numbers}
+
+It probably does the imaginary number $i=\sqrt{-1}$ a disservice to
+call it an imaginary number; numbers are all to a certain extent
+imaginary. It is easy to think there is something concrete about the
+idea of say `five', but it is a concept not a thing, it is the number
+of elements in sets that have five elements, or some such piece of
+semi-philosophical legerdemain. Negative numbers, or real numbers such
+as $\sqrt{2}$ are even less obviously `real' despite the advertizing
+given by calling real numbers by that name. However, there is a long
+history of adding new types of numbers because they are demanded by
+the algebraic or arithmetical rules that have been discovered; so, if
+you have subtraction and are able to do $7-5=2$ you immediately wonder
+what $5-7$ is and hence invent negative numbers; if you have division
+and know $6/3=2$ you wonder what $5/2$ is and invent rationals, when
+you know about Pythagoras's theorem and can work out $\sqrt{25}=5$ you
+get worried about $\sqrt{2}$ and invent irrational numbers. Similarly we have
+known how to solve quadratic equations $ax^2+bx+c=0$ using
+\begin{equation}
+  x=\frac{-b\pm\sqrt{b^2-4ac}}{2a}
+\end{equation}
+since the dawn of cities in Babylon, and that immediately raises the
+question of what $\sqrt{-1}$ is and leads to the so called imaginary
+number and complex numbers. In fact, complex numbers turn out to be a
+very powerful and useful mathematical construction, extremely helpful
+in, to give a computer science example, signal processing.
+
+So a complex number has a real part and an imaginary part:
+\begin{equation}
+  z=x+iy
+\end{equation}
+examples would be $1+2i$ or $-3i$ or whatever. You can add them:
+\begin{equation}
+  x_1+iy_1+x_2+iy_2=(x_1+x_2)+(y_1+y_2)i
+\end{equation}
+so $3+2i$ added to $-2+5i$ is $1+7i$. You can multiply them, rather than getting tangled up in symbols, lets just do a specific example:
+\begin{equation}
+  (1+3i)(2-5i)=2+6i-5i-15i^2=17+i
+\end{equation}
+where we have used that $i^2=-1$; this is, after all, sort of the
+point of $i$.
+
+There is some complex number specific algebraic manipulations, the \textbf{conjugate} of a complex number is the complex number you get by switching the sign of the imaginary part, so if $z=x+iy$ then the conjugate is
+\begin{equation}
+  z^*=x-iy
+\end{equation}
+There are actually two notations often used for the conjugate, $z^*$
+and $\bar{z}$; you see both used, sometimes by the same person; while
+we are talking notation, you should note that electronic engineers
+sometimes use $j$ for the complex number instead of $i$; so they use
+$j=\sqrt{-1}$; this is because the use $i$ for current. The absolute value of a complex number is
+\begin{equation}
+  |z|=\sqrt{zz^{*}}
+\end{equation}
+This is a real number, if $z=x+iy$ then, if you expand out the bracket
+you can see
+\begin{equation}
+  zz^*=(x+iy)(x-iy)=x^2+y^2
+\end{equation}
+
+One perhaps surprising thing is that you can divide two complex numbers; a complex number has the form $x+iy$ but dividing $z_1=x_1+iy_1$ by $z_2=x_2+iy_2$ seems to give something that doesn't have this form
+\begin{equation}
+  \frac{z_1}{z_2}=\frac{x_1+iy_1}{x_2+iy_2}
+\end{equation}
+However, you can get rid of the complexness of the denominator by multiplying by $z_2^*/z_2^*$; you can do this because it is actually just one. Hence
+\begin{equation}
+  \frac{z_1}{z_2}=\frac{x_1+iy_1}{x_2+iy_2}=\frac{x_1+iy_1}{x_2+iy_2}\frac{x_1-iy_1}{x_2-iy_2}=\frac{(x_1+iy_1)(x_2+iy_2)}{x_2^2+y_2^2}
+\end{equation}
+and if you multiply out the numerator, this does indeed have the form $x+iy$. Lets do an example@
+\begin{equation}
+  z=\frac{1+i}{3-2i}
+\end{equation}
+Now the conjugate of the denominator is $3+2i$ so
+\begin{equation}
+  z=\frac{1+i}{3-2i}\frac{3+2i}{3+2i}=\frac{(1+i)(3+2i)}{13}=\frac{1}{13}+\frac{5}{13}i
+\end{equation}
+
+Now, this ability to divide complex numbers is interesting. Complex numbers are somewhat akin to two dimensional vectors, you can map from one to the other:
+\begin{equation}
+  z=x+iy\leftrightarrow \mathbf{z}=x\mathbf{i}+y\mathbf{j}
+\end{equation}
+However, while you can add two dimensional vectors, you can't divide
+them, the complex structure is an additional structure beyond the
+geometrical structural of two-dimensional space. In fact, the ability
+to add a structure that allows division is only possible in certain
+numbers of dimensions, in two-dimensions there are complex numbers, in
+four there are another type of number called quoternions and in eight
+dimensions a very difficult structure called and octonion algebra.
+
+Apart from this musing about division and geometry, thinking of
+complex numbers as points in two-dimensional space leads to an
+important idea: the polar representation. Polar coordinates are an
+alternative coordinate system for two dimensions. Instead of writing
+the position as $(x,y)$ where $x$ is the distance in the $x$ direction
+and $y$ the distance in the $y$ direction you can write the position
+in polar coordinates as $(r,\theta)$ where $r$ is the distance from
+the origin and $\theta$ is the angle the line to the position makes
+with the $x$ axis. It is easy to translate between the two, a little bit of trigonometry tells us that $r=\sqrt{x^2+y^2}$ and $\theta=\arctan{(y/x)}$ and, conversely, $x=r\cos{\theta}$ and $y=r\sin{\theta}$.
+
+The same thing can be done with complex number, this is called the \textbf{polar representation} and relies on the Euler formula
+\begin{equation}
+  e^{i\theta}=\cos{\theta}+i\sin{\theta}
+\end{equation}
+It might seem that almost everything is named after Euler! There are
+lots of ways to derive this formula, including using the Taylor
+series; but we will just accept it here. This means there are two ways
+to write a complex number:
+\begin{equation}
+  z=x+iy = re^{i\theta}
+\end{equation}
+where $r=\sqrt{zz^*}=\sqrt{x^2+y^2}$ and $\theta=\arctan{(y/x)}$. As an example, \begin{equation}
+  1+i=\sqrt{2}e^{i\pi/4}
+\end{equation}
+
+One advantage of the polar representation is that it allows you to find powers of complex numbers, if
+\begin{equation}
+  z=re^{i\theta}
+\end{equation}
+then
+\begin{equation}
+  z^n=r^ne^{in\theta}
+\end{equation}
+
+This has a slightly surprising result when applied to roots. Recall
+the way there are two solutions to $x^2=a$, you have $x=\sqrt{a}$
+obviously, but also $x=-\sqrt{a}$. When you include complex numbers
+this is only the first in a whole series of similar examples, so, consider the equation:
+\begin{equation}
+  z^n=a
+\end{equation}
+in polar form this give
+\begin{equation}
+  \left(re^{i\theta}\right)^n=a
+\end{equation}
+or
+\begin{equation}
+  r^ne^{in\theta}=a
+\end{equation}
+so, first off $r=\sqrt[n]{a}$, so the interesting bit is the \textbf{n-th root of unity}:
+\begin{equation}
+  e^{in\theta}=1
+\end{equation}
+Now, obviously, $\theta=0$ is a solution, but so is $\theta=2\pi/n$ since 
+\begin{equation}
+  e^{in2\pi/n}=e^{2\pi i}=\cos{2\pi}+i\sin{2\pi}=1
+\end{equation}
+In fact there are $n$ solution: 0, $2\pi/n$, $4\pi/n$ and so on until you get to $2\pi$, that isn't a new solution, it is equivalent to $\theta=0$; for example
+\begin{equation}
+  e^{3i\theta}=1
+\end{equation}
+has solutions $\theta=0$, $\theta=2\pi/3$ and $\theta=4\pi/3$, or
+\begin{equation}
+  e^{4i\theta}=1
+\end{equation}
+has solutions $\theta=0$, $\theta=\pi/2$, $\theta=\pi$ and $\theta=3\pi/2$. For
+\begin{equation}
+  e^{2i\theta}=1
+\end{equation}
+the two solutions are $\theta=0$ and $\theta=\pi$ and since
+\begin{equation}
+  e^{\pi i}=\cos{\pi}+i\sin{\pi}=-1
+\end{equation}
+this is the $x^2=1$ means $x=1$ or $x=-1$ we mentioned earlier.
+
+\section*{Summary}
+Complex numbers have the form $z=x+iy$; the conjugate is
+\begin{equation}
+  z^*=x-iy
+\end{equation}
+while the absolute value is
+\begin{equation}
+  |z|=\sqrt{zz^*}=\sqrt{x^2+y^2}
+\end{equation}
+To divide two complex numbers you multiple above and below by the conjugate of the denominator, this will get rid of the $i$s below the bar:
+\begin{equation}
+  \frac{z_1}{z_2}=\frac{z_1}{z_2}\frac{z_2^*}{z_2^*}=\frac{z_1z_2^*}{|z_2|^2}
+\end{equation}
+You can rewrite a complex number in polar form
+\begin{equation}
+  z=re^{i\theta}
+\end{equation}
+using the Euler formula
+\begin{equation}
+  e^{i\theta}=\cos{\theta}+i\sin{\theta}
+\end{equation}
+This is particularly useful when calculating powers of complex
+numbers. When taking roots of complex numbers, remember there are $n$
+$n$-roots of unity.
+
+  
+
+\end{document}
+
