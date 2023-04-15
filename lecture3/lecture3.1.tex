@@ -4,6 +4,7 @@
 \usepackage{graphicx}
 \usepackage{fancyhdr}
 \usepackage{amsmath}
+\usepackage{xcolor}
 \pagestyle{fancy}
 \lfoot{\texttt{coms10013.github.io}}
 \lhead{Analysis - 3.1 Taylor expansion - Conor}
@@ -15,7 +16,7 @@
 
 We recall from our ``infinitessimal'' treatment of derivatives that
 \begin{equation}
-  \frac{df}{dt}=\frac{f(t+\delta t)-f(t)}{\delta t}
+  \frac{df}{dt}=\frac{f(t+dt)-f(t)}{dt}
 \end{equation}
 where $dt$ is regarded in some fictional way as being a number so
 small that we can set it to zero when it is convenient to do so; it is
@@ -26,17 +27,17 @@ but we also noted how intuitively useful this picture is.
 
 The formula can be turned around
 \begin{equation}
-  f(t+\delta)\approx f(t)+f'(t)\delta
+  f(t+\delta t)\approx f(t)+f'(t)\delta t
 \end{equation}
-where $\delta$ isn't an infinitessimal, just a very small number; this
+where $\delta t$ isn't an infinitessimal, just a very small number; this
 is also where the formula is approximate; here for convenience later when we have lots of higher derivatives, I use $f'(t)$ rather than $\dot{f}(t)$ to denote the derivated:
 \begin{equation}
   f'(t)=\left.\frac{df}{dt}\right|_t
 \end{equation}
-Anyway, the formula, $f(t+\delta)\approx f(t)+f'(t)\delta$, makes a
+Anyway, the formula, $f(t+\delta t)\approx f(t)+f'(t)\delta t$, makes a
 lot of sense, for simplicity thinking of $t$ as time the formula,
 sometimes called the \textbf{Euler approximation}, says that the value
-of a function after $\delta$ has passed, it the original value plus
+of a function after a small extra time $\delta t$ has passed, it the original value plus
 delta times the rate of change; or, the change in the function is the
 rate of change by the time it has spent changing. Of course, this
 leaves out the possibility the rate of change is also changing. To
@@ -47,11 +48,11 @@ is constant.
 In fact, with a bit of thought it is possible to work out formula that
 takes all of this, where this is the rate of change of the rate of change, and the rate of change of that and so on, into account. This is the \textbf{Taylor expansion}: it says
 \begin{equation}
-  f(t+\delta t)=f(t)+f'(t)\delta+\frac{1}{2}f''(t)\delta^2+\frac{1}{6}f'''(t)\delta^3+\ldots
+  f(t+\delta t)=f(t)+f'(t)\delta t+\frac{1}{2}f''(t)\delta t^2+\frac{1}{6}f'''(t)\delta t^3+\ldots
 \end{equation}
 or to avoid the `$\ldots$'
 \begin{equation}
-  f(t+\delta t)=f(t)+\sum_{n=1}^\infty \frac{1}{n!}f^{(n)}(t)\delta^n
+  f(t+\delta t)=f(t)+\sum_{n=1}^\infty \frac{1}{n!}f^{(n)}(t)\delta t^n
 \end{equation}
 where
 \begin{equation}
@@ -59,19 +60,24 @@ where
 \end{equation}
 and, finally, to write the same thing with different notation
 \begin{equation}
-  f(t+\delta t)=f(t)+\sum_{n=1}^\infty \frac{1}{n!}\left.\frac{d^nf}{dt^n}f\right_t\delta^n
+  f(t+\delta t)=f(t)+\sum_{n=1}^\infty \frac{1}{n!}\left.\frac{d^nf}{dt^n}f\right|_t\delta t^n
 \end{equation}
 We often say this is the Taylor expansion around $t$, usually $t$ would be a specific value, so the Taylor expansion of $f(t)$ around $t=0$ would be
 \begin{equation}
-  f(\delta t)=f(0)+\sum_{n=1}^\infty \frac{1}{n!}f^{(n)}(0)\delta^n
+  f(\delta t)=f(0)+\sum_{n=1}^\infty \frac{1}{n!}f^{(n)}(0)\delta t^n
 \end{equation}
 or, say, around $t=2$
 \begin{equation}
-  f(2+\delta t)=f(2)+\sum_{n=1}^\infty \frac{1}{n!}f^{(n)}(2)\delta^n
+  f(2+\delta t)=f(2)+\sum_{n=1}^\infty \frac{1}{n!}f^{(n)}(2)\delta t^n
 \end{equation}
 
-Whatever the notation, this is a powerful and useful formula. We
-haven't said how often it works; for example, $f(t)$ might have funny
+Whatever the notation, this is a powerful and useful formula. There is
+nothing very complicated about how it is derived; basically you can
+get to it by applying the Euler formula to the derivative itself to
+get an estimate for the average value of the derivative and then do
+the same for the derivative of the derivative and so on. We don't look
+at that here for reasons of time, not because it is too difficult. We
+haven't said how often the Taylor expansion works; for example, $f(t)$ might have funny
 behaviour, for example if $f(t)=t+1/t$ then the Taylor expansion
 around $t=0$ wouldn't work and, indeed $f(t)$ goes to infinity as $t$
 gets closer to zero. In that case, there is a more general version of
@@ -84,12 +90,42 @@ there are functions for which the series does not work, but, again, we
 are going to ignore that here and think about the large class of
 well-behaved functions whose Taylor expansions are well-behaved.
 
+In fact, there is an interesting issue here; for the class of these
+well-behaved functions, called \textbf{analytic functions}, the Taylor
+expansion seems to say that there are two ways to write down the
+function, for a function which is analytic around $t=0$, in the first
+description $f(t)$ gives a value for $f$ at each value $t$, in the
+second, describes the function in terms of the derivatives, $f(0$,
+$f'(0)$, $f''(0)$ and so on, with the Taylor expansion translating
+from the second description back to the first. There is one of a
+number examples of functions having two different descriptions,
+another example is given by Fourier analysis, we won't talk more about
+that here and instead just think of the Taylor expansion as a way to
+approximate functions and work out properties for them.
 
-
-
+Let's look at an example,
+\begin{equation}
+  f(t)=\cos{t}
+\end{equation}
+around $t=0$. Now $f'(t)=-\sin{t}$ and $f''(t)=-\cos{t}$ and
+$f'''(t)=\sin{t}$ and $f^{(4)}(t)=\cos{t}$ and after that the cycle
+repeats. Using $\sin{0}=0$ and $\cos{0}=1$ this tells us that
+\begin{equation}
+  \cos{t}=1-\frac{1}{2}t^2+\frac{1}{24}t^4-\frac{1}{720}t^6+\ldots
+\end{equation}
+We can see how well this works in Figure~1.
+\begin{figure}
+  \begin{center}
+    \include{cos}
+    \end{center}
+  \caption{A comparison of $\cos{t}$ with successive terms of Taylor expansion; we see the approximation getting better and better, at least in the range we are looking at; the labelling of the terms is the number of non-zero terms included.}
+\end{figure}
 
 \section*{Summary}
-
+The main thing to remember is the expansion itself:
+\begin{equation}
+  f(t+\delta t)=f(t)+\sum_{n=1}^\infty \frac{1}{n!}f^{(n)}(t)\delta t^n
+\end{equation}
 
 
 \end{document}
