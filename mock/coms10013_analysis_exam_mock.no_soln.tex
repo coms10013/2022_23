@@ -1,0 +1,79 @@
+%ps1.tex
+%notes for the course Probability and Statistics COMS10011 
+%taught at the University of Bristol
+%2019_20 Conor Houghton conor.houghton@bristol.ac.uk
+
+%To the extent possible under law, the author has dedicated all copyright 
+%and related and neighboring rights to these notes to the public domain 
+%worldwide. These notes are distributed without any warranty. 
+
+\documentclass[11pt,a4paper]{scrartcl}
+\typearea{12}
+\usepackage{graphicx}
+%\usepackage{pstricks}
+\usepackage{listings}
+\usepackage{color}
+\lstset{language=C}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\lhead{\texttt{github.com/coms10013/2022\_23} and  \texttt{coms10013.github.io}}
+\lfoot{COMS10013 - ws1 - Conor}
+\begin{document}
+
+\section*{COMS10013 - exam questions - 25 points}
+
+All sections are worth five points; outline solutions are just outlines, you should give more workings!
+
+\subsection*{Part 1}
+This question is about the definition and properties of differenciation. In one sentence describe in words what $df/dt$ means [1 points]. Give the formal definition of the limit [1 point] and of $df/dt$ [1 point] and use this to argue [2 points] that
+    $$
+    \frac{d(f+g)}{dt}=\frac{df}{dt}+\frac{dg}{dt}
+    $$
+
+  
+  \subsection*{Part 2}
+  This question is about actually taking derivatives. Using the quotient rule work out [1 point] 
+  $$
+    \frac{d\tan{x}}{dx}
+    $$
+    Using the chain rule work out [2 points]
+    $$
+    \frac{d\tan{\sin{x}}}{dx}
+      $$
+      Given the Taylor expansion of the exponential
+      $$
+      e^x=\sum_{n=0}^\infty \frac{x^n}{n!}
+      $$
+      show that [2 points]
+      $$
+      \frac{de^x}{dx}=e^x
+      $$
+
+      \subsection*{Part 3}
+      This question is about partial derivatives. What is the gradient [1 point] of
+      $$
+      z=xy\sin{xy}
+      $$
+      Find the Hessian [2 point], show $(0,0)$ is an extremum [1 point] and indicate whether it is a maximum, minimum or saddle point [1 point].
+
+      \subsection*{Part 4}
+      This question is about complex numbers. What are the solutions of [1 point]
+      $$z^2+2z+2=0$$
+      What are the solutions of [1 point]
+      $$z^2+2z+5=0$$
+      In each case what is the relationship between the two solutions as complex numbers? [2 points]
+      How many solutions do you expect for [1 point]
+      $$z^{6}-1=0$$
+      What are these solutions? [1 point]
+
+\subsection*{Part 5}
+This question is about differential equations. Solve the following [a-c 1 point each, d 2 points] where the dot means the derivative with respect to time.
+	\begin{itemize}
+		\item[(a)] $\dot{y}(t) - y(t) = 0$ with initial condition $y(0) = 1$.
+		\item[(b)] $\dot{y}(t) + 3y(t) = 0$ with initial condition $y(3) = 3$.
+		\item[(c)] $\dot{y}y(t) = 0$ with  initial condition $y(5) = 2$.
+                  \item[(d)] $\dot{y}=ry(1-y)$ with $y(0)=y_0$. 
+	\end{itemize}
+
+
+\end{document}
