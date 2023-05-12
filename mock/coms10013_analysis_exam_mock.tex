@@ -74,23 +74,23 @@ This question is about the definition and properties of differenciation. In one 
       \subsection*{Part 3}
       This question is about partial derivatives. What is the gradient [1 point] of
       $$
-      z=xy\sin{xy}
+      z=xy\cos{xy}
       $$
       Find the Hessian [2 point], show $(0,0)$ is an extremum [1 point] and indicate whether it is a maximum, minimum or saddle point [1 point].
 
       \subsubsection{Outline Solution}
       So the gradient is
-      $$\nabla z=\left(y\sin{xy}+xy^2\cos{xy},x\sin{xy}+x^2y\cos{xy}\right)$$
+      $$\nabla z=\left(y\cos{xy}-xy^2\sin{xy},x\cos{xy}-x^2y\sin{xy}\right)$$
       The Hessian is
       $$H=\left[\begin{array}{cc}z_{xx}&z_{xy}\\z_{yx}&z_{yy}\end{array}\right]$$
       where
-      $$z_{xx} = y^2\cos(xy) + y\cos(xy) - x^2y^3\sin(xy) + 2xy^2\cos(xy)$$
+      $$z_{xx} = -2y^2\sin{xy}-xy^3\cos{xy}$$
       and
-      $$z_{xy} = \cos(xy) - xy^2\sin(xy) + y\cos(xy)=z_{yx}$$
+      $$z_{xy} = \cos{xy}-3xy\sin{xy}-x^2y^2\cos{xy}=z_{yx}$$
       and finally
-$$z_{yy}= x^2\cos(xy) + x\cos(xy) - x^3y\sin(xy) + 2x^2y\cos(xy)$$
-      So the gradient is zreo at $x=y=0$ showing it is an extemum and
-      $$H=\left[\begin{array}{cc}0&1\\1&0\end{array}\right]$$
+$$z_{yy}= -2x^2\sin(xy) - x^3y\cos(xy)$$
+      So the gradient is zero at $x=y=0$ showing it is an extemum and
+      $$H=\left[\begin{array}{cc}0&0\\0&0\end{array}\right]$$
       which has determinant $-1$ and trace zero, so the two eigenvalues have opposite signs and this is a saddle point.
 
       \subsection*{Part 4}
