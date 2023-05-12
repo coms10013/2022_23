@@ -121,6 +121,32 @@ This question is about differential equations. Solve the following [a-c 1 point 
 
 
 \subsubsection*{Solution}
-These previously appeared in worksheet 4.
-
+These previously appeared in worksheet 4 and they have solutions there, except d) for which we have
+\begin{equation}
+  \frac{1}{y(1-y)} \dot{y}=r
+\end{equation}
+and then using the partial fraction expansion
+\begin{equation}
+  \left(\frac{1}{y}+\frac{1}{1-y}\right)\dot{y}=r
+\end{equation}
+and so
+\begin{equation}
+  \int{\frac{dy}{y}}+\int{\frac{dy}{1-y}}=rt+C
+\end{equation}
+and hence
+\begin{equation}
+  \log{y}-\log{1-y}=rt+C
+\end{equation}
+or
+\begin{equation}
+  \log{\frac{y}{1-y}}=rt+c
+\end{equation}
+and hence
+\begin{equation}
+  \frac{y}{1-y}=Ae^{rt}
+\end{equation}
+and solve for $y$ to get
+\begin{equation}
+  y=\frac{Ae^{rt}}{1+Ae^{rt}}
+  \end{equation}
 \end{document}
