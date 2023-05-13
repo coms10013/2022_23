@@ -1,0 +1,187 @@
+%ps1.tex
+%notes for the course Probability and Statistics COMS10011 
+%taught at the University of Bristol
+%2019_20 Conor Houghton conor.houghton@bristol.ac.uk
+
+%To the extent possible under law, the author has dedicated all copyright 
+%and related and neighboring rights to these notes to the public domain 
+%worldwide. These notes are distributed without any warranty. 
+
+\documentclass[11pt,a4paper]{scrartcl}
+\typearea{12}
+\usepackage{graphicx}
+%\usepackage{pstricks}
+\usepackage{listings}
+\usepackage{color}
+\lstset{language=C}
+\usepackage{fancyhdr}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\pagestyle{fancy}
+\lhead{\texttt{github.com/coms10013/2022\_23} and  \texttt{coms10013.github.io}}
+\lfoot{COMS10013 - ws4 - more solutions - Conor}
+\begin{document}
+
+\section*{COMS10013 - Analysis - WS4 - more outline solutions}
+
+\subsection*{Extra questions}
+
+These are extra questions you might attempt in the workshop or at a
+later time; in fact these questions are tricky so you might want to
+come back to them later when you've had some more lectures.
+
+\begin{enumerate}
+
+	
+	\item \textbf{Solutions as a vector space}	
+	The aim of this exercise is to prove most of the following theorem:
+	the solutions to the second-order linear homogeneous differential equation
+	$a\ddot{y}(t) + b\dot{y}(t) + cy(t) = 0$ form a vector space. Note that this also follows from a theorem stated in the lecture notes. Prove:
+	\begin{itemize}
+		\item[(a)] If $f(t)$ and $g(t)$ are two solutions to this differential equation, then $h(t) = f(t) + g(t)$ is also a solution to this differential equation: this is easy since $d(f+g)/dt=\dot{f}+\dot{g}$ and so on.
+		\item[(b)] If $f(t)$ is a solution to this differential equation,
+		and $s$ is any integer, then $k(t) = s \cdot f(t)$ is also a solution to this differential equation: again, follow from linearity of differentiation $d(sf)/dt=s\dot{f}$.
+		\item[(c)] The function $f_0(t) = 0$ (the function that is zero for all $t$) is a solution to the differential equation: easy to see from substituting zero into the equation.
+	\end{itemize}
+	Technically we would also have to show that addition of
+        solutions is commutative and associative, but this is tedious
+        and doesn't have anything to do with differential equations -
+        the way to prove this would just be to show it for all
+        functions. So you don't have to prove that here.
+	
+	Note that this theorem holds even if $a,b,c$ are functions of
+        $t$, same proof, you never had to differentiate these
+        constants, and for any order of linear differential equation,
+        not just second order. The theorem doesn't hold for
+        inhomogeneous equations however: for a challenge, can
+        you see which parts of the proof don't work for $a\ddot{y}(t) +
+        b\dot{y}(t) + cy(t) = d$ and for which $d$? \textbf{Solution}: so if $f$ and $g$ are solutions and you substitute in $\lambda f+\mu g$ you end up with $(\lambda +\mu)d=d$ so, basically, the linearity holds for $\mu=1-\lambda$; the third property, zero is a solution, doesn't hold unless $d$ is zero. 
+	
+	\item \textbf{Radioactive decay}
+	This is the standard example from physics to motivate differential equations.
+	Marie Sk\l{}odowska–Curie discovered the element Radium in the late 19$^\text{th}$ century, together with her husband Pierre. Her notebooks on which she recorded her discoveries are so radioactive that they are kept locked in lead boxes.
+	
+	An atom of Radium-226 normally decays into an alpha particle,
+        a Helium nucleus, and an atom of Radon-222. Each atom has a
+        fixed probability of decaying in a fixed time period, so if
+        you have a box of radium then the number of decays you will
+        observe in a fixed, small time period is proportional to the
+        number of atoms of radium you had to start with.
+	
+	The standard way to write this is $\frac{dy}{dt} = cy$, where
+        $c$ is a negative constant, or more suggestively $dy = cy\,dt$
+        which exactly captures the following statement: the change in
+        the number of atoms ($dy$) that you observe is proportional
+        (via $c$) to the number of atoms you started with ($y$) and
+        the change in time ($dt$) during your observation, e.g., the
+        length of time you observe for.  We recognise this as a
+        differential equation and can immediately derive the
+        radioactive decay equation $y(t) = Ae^{-rt}$ where $A = y(0)$
+        is the number of atoms you started with and $r = -c$ is the
+        rate of decay ($r$ is positive).
+	
+	In nuclear physics, the half-life $\lambda$ is the time it
+        takes for half of a given quantity of radioactive substance to
+        decay.
+	
+	\begin{itemize}
+		\item[(a)] Assuming $t$ is measured in years, find a
+                  formula for the half-life $\lambda$ in years as a
+                  function of the decay constant $r$ and vice versa.
+		\item[(b)] Given that Radon-226 has a half-life of
+                  1600 years, what is its rate of decay $r$?
+	\end{itemize}		
+        \textbf{Solution}: so if $y(t)=Ae^{-rt}$ putting $t=0$ tells us that $y(t)=y(0)e^{-rt}$, or, equivalently,
+        \begin{equation}
+          \log{\frac{y(t)}{y(0)}}=-rt
+        \end{equation}
+        where we have used $\log{a}-\log{b}=\log{a/b}$. Now this means
+        \begin{equation}
+          \log{2}=r\lambda
+        \end{equation}
+        or $\lambda=\log{2}/\lambda$; if $\lambda=1600$ this means $r=0.00043$ per year.
+
+        
+        \item \textbf{A non-linear example} The example from physics
+          about is about decay, the obvious corresponding example from
+          biology population growth, if every squirrel has $r$ baby
+          squirrels each year and squirrels can start having babies as
+          soon as they are born and leaving out squirrel death then
+          the number of squirrels satisfies:
+          \begin{equation}
+            \frac{dN}{dt}=rN
+          \end{equation}
+          and since the solution is $N=A\exp{rt}$ this explodes in a
+          Malthusian disaster with a one metre deep layer of squirrels coating the earth after only
+          \begin{equation}
+            t=(\log{96000000}-\log{A})/r=18/r
+          \end{equation}
+          years, which even for $r=1$ is a problem; a child born today
+          would drown in squirrels before reaching adulthood.\\ \\ Now
+          there are a number of incorrect approximations, the
+          reproductive precociousness and immortality of squirrels
+          but, while these will change the precise predicted time to
+          the squirrel singularity, they won't stop it. However, we
+          realise that the differential equation ignores the resource
+          requirements of squirrels, their population is limited by
+          the availability of nuts; if there are too many squirrels
+          there aren't enough nuts for them all and the population
+          growth slows. In the language of ecology there is a limited
+          \textsl{carrying capacity} for squirrels.\\
+          \\
+          This is reflected in the logistic equation introduced by Pierre Fran\c{c}ois Verhulst in 1838; this equation looks like
+          \begin{equation}
+            \frac{df}{dt}=rf(1-f)
+          \end{equation}
+In this version the carrying capacity has been set to one so $f$ is
+the population as a fraction of the carrying capacity; the equation
+says that the rate of growth of $f$ depends on $f$, the number of
+squirrels, and on $1-f$, the amount of resource not already consumed,
+the amount of uneaten nuts. Notice that when $f$ gets close to one the
+growth of the population slows.\\
+\\
+This equation is non-linear so it can't be solved by the methods used for linear equations. Many important non-linear equations can't be solved but this one case, by direct integration. The fact you need is that
+\begin{equation}
+  \frac{1}{f(1-f)}=\frac{1}{f}+\frac{1}{1-f}
+\end{equation}
+\textbf{Solution}:
+ we have
+\begin{equation}
+  \frac{1}{y(1-y)} \dot{y}=r
+\end{equation}
+and then using the partial fraction expansion
+\begin{equation}
+  \left(\frac{1}{y}+\frac{1}{1-y}\right)\dot{y}=r
+\end{equation}
+and so
+\begin{equation}
+  \int{\frac{dy}{y}}+\int{\frac{dy}{1-y}}=rt+C
+\end{equation}
+and hence
+\begin{equation}
+  \log{y}-\log{1-y}=rt+C
+\end{equation}
+or
+\begin{equation}
+  \log{\frac{y}{1-y}}=rt+c
+\end{equation}
+and hence
+\begin{equation}
+  \frac{y}{1-y}=Ae^{rt}
+\end{equation}
+and solve for $y$ to get
+\begin{equation}
+  y=\frac{Ae^{rt}}{1+Ae^{rt}}
+  \end{equation}
+
+
+
+          
+        
+\end{enumerate}
+
+
+
+\end{document}
+     
